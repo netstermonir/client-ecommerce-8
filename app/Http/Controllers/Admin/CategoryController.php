@@ -43,8 +43,8 @@ class CategoryController extends Controller
 
     //category edit method 
     public function edit($id){
-        $category = DB::table('categories')->where('id',$id)->first();
-        return response()->json($data);
+        $data = DB::table('categories')->where('id',$id)->first();
+        return view('admin.category.category.edit', compact('data'));
     }
 
     //category update method 

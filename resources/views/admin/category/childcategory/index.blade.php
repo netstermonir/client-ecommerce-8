@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Category</h1>
+            <h1 class="m-0">ChildCategory</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -20,22 +20,37 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Add New ChildCategory</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="{{ route('category.store') }}" method="POST">
+                    <form action="{{ route('childcategory.store') }}" method="POST" id="add_form">
                       @csrf
                     <div class="modal-body">
+                      <div class="form-group">
+                      <label for="subcategory_id">Category/SubCategory Name</label>
+                      <select class="form-control" name="subcategory_id" id="subcategory_id" required>
+                        @foreach($category as $row)
+                        @php
+                        	$subcat = DB::table('subcategories')->where('category_id', $row->id)->get();
+                        @endphp
+                        	<option value="{{ $row->id }}" disabled="" style="color: white;">{{ $row->category_name }}</option>
+                        @foreach($subcat as $row)
+                        	<option value="{{ $row->id }}"> -- {{ $row->subcat_name }}</option>
+                        @endforeach
+                        @endforeach
+                      </select>
+                      <small id="cat" class="form-text text-muted">This is Main Category</small>
+                    </div>
                     <div class="form-group">
-                      <label for="category_name">Category Name</label>
-                      <input type="text" class="form-control" id="category_name" name="category_name" aria-describedby="cat" placeholder="Enter Category Name" required>
-                      <small id="cat" class="form-text text-muted">This is Manin Category</small>
+                      <label for="childcategory_name">ChildCategory Name</label>
+                      <input type="text" class="form-control" id="childcategory_name" name="childcategory_name" aria-describedby="subcat" placeholder="Enter SubCategory Name" required>
+                      <small id="subcat" class="form-text text-muted">This is Child Category</small>
                     </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Save</button>
+                          <button type="submit" class="btn btn-primary"><span class="d-none">...Loading...</span> Save</button>
                         </div>
                     </form>
                   </div>
@@ -55,31 +70,22 @@
           <div class="col-12">
            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">All Category</h3>
+                <h3 class="card-title">All ChildCategory</h3>
               </div>
               <!-- /.card-header -->
                <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped table-sm">
+                <table class="table table-bordered table-striped table-sm ytable">
                   <thead>
                   <tr>
                     <th>Sl</th>
+                    <th>ChildCategory Name</th>
                     <th>Category Name</th>
-                    <th>Category Slug(s)</th>
+                    <th>SubCategory Name</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($data as $key=>$row)
-                  <tr>
-                      <td>{{ $key+1 }}</td>
-                      <td>{{ $row->category_name }}</td>
-                      <td>{{ $row->category_slug }}</td>
-                      <td>
-                        <a href="#" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#categoryeditModal" data-id="{{ $row->id }}" ><i class="fas fa-edit"></i></a>
-                        <a href="{{ route('category.delete', $row->id) }}" id="category-delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                      </td>
-                  </tr>
-                  @endforeach
+           
                   </tbody>
                 </table>
               </div>
@@ -95,20 +101,37 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit ChildCategory</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div id="modal_body"></div>
+      <div id="modal_body">
+        
+      </div>
     </div>
   </div>
 </div>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-  $('body').on('click', '.edit', function(){
-    let cat_id = $(this).data('id');
-    $.get("category/edit/"+cat_id, function(data){
+  $(function childCategory(){
+  	var table = $('.ytable').DataTable({
+  		processing: true,
+  		serverSide: true,
+  		ajax:"{{ route('childcategory.index') }}",
+  		columns: [
+  			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+  			{data: 'childcategory_name', name: 'childcategory_name'},
+  			{data: 'category_name', name: 'category_name'},
+  			{data: 'subcat_name', name: 'subcat_name'},
+  			{data: 'action', name: 'action', oderable: true, searchable: true},
+  		]
+  	});
+  });
+//edit 
+$('body').on('click', '.edit', function(){
+    let id = $(this).data('id');
+    $.get("childcategory/edit/"+id, function(data){
       $('#modal_body').html(data);
     });
   });
