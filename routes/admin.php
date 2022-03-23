@@ -10,6 +10,8 @@ Route::get("/admin/login", [
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_admin'], function() {
     Route::get("/admin/home", "AdminController@admin")->name("admin.home");
     Route::get("/admin/logout", "AdminController@logout")->name("admin.logout");
+    Route::get("/admin/password/change", "AdminController@passwordChange")->name("admin.password.change");
+    Route::post("/admin/password/update", "AdminController@passwordUpdate")->name("admin.password.update");
 
     //Main Category Route
     Route::group(['prefix' => 'category'], function() {

@@ -29,6 +29,7 @@
               <p>Dashboard</p>
             </a>
           </li>
+          {{-- category menu --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -64,10 +65,59 @@
               </li>
             </ul>
           </li>
+          {{-- Setting menu --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Setting Options
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('category.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Seo Setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('subcategory.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Smtp Setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('childcategory.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payment Setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('brand.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Page Setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('brand.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Website Setting</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- admin password change --}}
           <li class="nav-header">Profile</li>
           <li class="nav-item">
+            <a href="{{ route('admin.password.change') }}" id="password" class="nav-link">
+              <i class="nav-icon fas fa-key text-info"></i>
+              <p class="text">Password Change</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.logout') }}" id="logout" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
               <p class="text">Logout</p>
             </a>
           </li>
