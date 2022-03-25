@@ -41,12 +41,34 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
     });
 
     //Brand Route
-    //ChildCategory Route
     Route::group(['prefix' => 'brand'], function() {
         Route::get("/", "BrandController@index")->name("brand.index");
         Route::post("/store", "BrandController@store")->name("brand.store");
         Route::get("/delete/{id}", "BrandController@destroy")->name("brand.delete");
         Route::get("/edit/{id}", "BrandController@edit");
         Route::post("/update", "BrandController@update")->name("brand.update");
+    });
+
+    //setting Route
+    Route::group(['prefix' => 'setting'], function() {
+        // seo setting
+        Route::group(['prefix' => 'seo'], function() {
+        Route::get("/", "SettingController@seo")->name("seo.setting");
+        Route::post("/update/{id}", "SettingController@seoUpdate")->name("seo.setting.update");
+    });
+        // smtp setting
+        Route::group(['prefix' => 'smtp'], function() {
+        Route::get("/", "SettingController@smtp")->name("smtp.setting");
+        Route::post("/update/{id}", "SettingController@smtpUpdate")->name("smtp.setting.update");
+    });
+        //page setting
+        Route::group(['prefix' => 'page'], function() {
+        Route::get("/", "PageController@index")->name("page.index");
+        Route::get("/create", "PageController@create")->name("page.create");
+        Route::post("/store", "PageController@store")->name("page.store");
+        Route::get("/delete/{id}", "PageController@destroy")->name("page.delete");
+        Route::get("/edit/{id}", "PageController@edit")->name("page.edit");
+        Route::post("/update/{id}", "PageController@pageUpdate")->name("page.update");
+    });
     });
 });

@@ -19,6 +19,10 @@
   <link rel="stylesheet" href="{{asset('public/backend/dist/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/backend/plugins/toastr/toastr.min.css')}}">
   <link rel="stylesheet" href="{{ asset('public/backend/plugins/sweetalert2/sweetalert2.min.css') }}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('public/backend/plugins/summernote/summernote-bs4.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.min.css" integrity="sha512-bkB9w//jjNUnYbUpATZQCJu2khobZXvLP5GZ8jhltg7P/dghIrTaSJ7B/zdlBUT0W/LXGZ7FfCIqNvXjWKqCYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 @guest
@@ -99,7 +103,34 @@
 <!-- <script src="{{ asset('public/backend/dist/js/pages/dashboard2.js') }}"></script> -->
 <script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('public/backend/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-
+<script src="{{ asset('public/backend/plugins/select2/js/select2.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('public/backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js" integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+  $("#meta_tag").selectize({
+  plugins: ["remove_button"],
+  delimiter: ",",
+  persist: false,
+  create: function (input) {
+    return {
+      value: input,
+      text: input,
+    };
+  },
+});
+  $("#meta_keyword").selectize({
+  plugins: ["remove_button"],
+  delimiter: ",",
+  persist: false,
+  create: function (input) {
+    return {
+      value: input,
+      text: input,
+    };
+  },
+});
+</script>
 <script>
   $(document).on("click", "#category-delete", function(e){
     e.preventDefault();
@@ -117,7 +148,7 @@
       window.location.href = link;
     }
     else{
-      swal.fire("Safe Category!");
+      swal.fire("Safe Data!");
     }
   })
 });
@@ -183,6 +214,12 @@
       "responsive": true,
     });
   });
+</script>
+<script type="text/javascript">
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+  })
 </script>
 </body>
 </html>

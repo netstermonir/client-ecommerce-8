@@ -76,13 +76,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('category.index') }}" class="nav-link">
+                <a href="{{ route('seo.setting') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Seo Setting</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('subcategory.index') }}" class="nav-link">
+                <a href="{{ route('smtp.setting') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Smtp Setting</p>
                 </a>
@@ -94,9 +94,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('brand.index') }}" class="nav-link">
+                <a href="{{ route('page.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Page Setting</p>
+                  <p>Page Create</p>
                 </a>
               </li>
               <li class="nav-item">
