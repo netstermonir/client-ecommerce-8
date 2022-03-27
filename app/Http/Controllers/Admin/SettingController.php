@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use File; 
+use Image;
 use Carbon\Carbon;
 
 class SettingController extends Controller
@@ -57,6 +59,59 @@ class SettingController extends Controller
         $data ['updated_at'] = Carbon::now();
         DB::table('smtp')->where('id', $id)->update($data);
         $notify = array('messege' => 'Smtp Setting Update Sucessfull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notify);
+    }
+
+    //website setting show method
+    public function website(){
+        $data = DB::table('settings')->first();
+        return view('admin.setting.website-setting', compact('data'));
+    }
+
+    //website setting update method
+    public function websiteUpdate(Request $request, $id){
+        $data = array();
+        $data ['currency'] = $request->currency;
+        $data ['phone_one'] = $request->phone_one;
+        $data ['phone_two'] = $request->phone_two;
+        $data ['main_mail'] = $request->main_mail;
+        $data ['support_mail'] = $request->support_mail;
+        $data ['facebook'] = $request->facebook;
+        $data ['linkedin'] = $request->linkedin;
+        $data ['pinterest'] = $request->pinterest;
+        $data ['messenger'] = $request->messenger;
+        $data ['instagram'] = $request->instagram;
+        $data ['whatsapp'] = $request->whatsapp;
+        $data ['youtube'] = $request->youtube;
+        $data ['address'] = $request->address;
+        if ($request->logo) {
+                if (File::exists($request->old_logo)) {
+                unlink($request->old_logo);
+                }
+            $logo = $request->logo;
+            $logo_name = uniqid().'.'.$logo->getClientOriginalExtension();
+            Image::make($logo)->resize(320,120)->save('public/files/setting/' .$logo_name);
+            $data ['logo'] = 'public/files/setting/' .$logo_name;
+        }
+        else{
+            $data ['logo'] = $request->old_logo;
+        }
+        if ($request->favicon) {
+                if (File::exists($request->old_favicon)) {
+                unlink($request->old_favicon);
+                }
+            $favicon = $request->favicon;
+            $favicon_name = uniqid().'.'.$favicon->getClientOriginalExtension();
+            Image::make($favicon)->resize(32,32)->save('public/files/setting/' .$favicon_name);
+            $data ['favicon'] = 'public/files/setting/' .$favicon_name;
+        }
+        else{
+            $data ['favicon'] = $request->old_favicon;
+        }
+        $data ['created_at'] = Carbon::now();
+        $data ['updated_at'] = Carbon::now();
+        DB::table('settings')->where('id', $id)->update($data);
+        $notify = array('messege' => 'website Setting Update Sucessfull !', 'alert-type' => 'success');
         return redirect()->back()->with($notify);
     }
 }
