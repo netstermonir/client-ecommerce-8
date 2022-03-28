@@ -76,7 +76,7 @@
             </ul>
           </li>
           {{-- offer menu --}}
-          <li class="nav-item {{ Route::is('seo.setting') || Route::is('smtp.setting') || Route::is('page.index') || Route::is('page.index') || Route::is('website.setting') ? 'menu-is-opening menu-open' : '' }}">
+          <li class="nav-item {{ Route::is('cupon.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
@@ -95,6 +95,24 @@
                 <a href="{{ route('smtp.setting') }}" class="nav-link {{ Route::is('smtp.setting') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Campaign</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- pickup point menu --}}
+          <li class="nav-item {{ Route::is('pickuppoint.index') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Pickup Point
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('pickuppoint.index') }}" class="nav-link {{ Route::is('pickuppoint.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pickup Point</p>
                 </a>
               </li>
             </ul>
