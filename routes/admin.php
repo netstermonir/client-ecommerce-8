@@ -23,6 +23,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post("/update", "CategoryController@update")->name("category.update");
     });
 
+    //global route
+    Route::get('get-child-category/{id}', "CategoryController@getChildcat");
+
     //SubCategory Route
     Route::group(['prefix' => 'subcategory'], function() {
         Route::get("/", "SubcategoryController@index")->name("subcategory.index");
@@ -57,6 +60,22 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::get("/delete/{id}", "WarehouseController@destroy")->name("warehouse.delete");
         Route::get("/edit/{id}", "WarehouseController@edit");
         Route::post("/update", "WarehouseController@update")->name("warehouse.update");
+    });
+
+    //product Route
+    Route::group(['prefix' => 'product'], function() {
+        Route::get("/", "ProductController@index")->name("product.index");
+        Route::get("/create", "ProductController@create")->name("product.create");
+        Route::post("/store", "ProductController@store")->name("product.store");
+        Route::get("/delete/{id}", "ProductController@destroy")->name("product.delete");
+        Route::get("/edit/{id}", "ProductController@edit")->name("product.edit");
+        // Route::post("/update", "BrandController@update")->name("brand.update");
+        Route::get("/not-featured/{id}", "ProductController@notfeatured");
+        Route::get("/featured/{id}", "ProductController@featured");
+        Route::get("/not-deal/{id}", "ProductController@notdeal");
+        Route::get("/deal/{id}", "ProductController@deal");
+        Route::get("/not-status/{id}", "ProductController@notstatus");
+        Route::get("/status/{id}", "ProductController@status");
     });
 
     //cupon Route

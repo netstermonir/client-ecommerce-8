@@ -75,12 +75,36 @@
               </li>
             </ul>
           </li>
+          {{-- product menu --}}
+          <li class="nav-item {{ Route::is('product.create') || Route::is ('product.index') || Route::is ('product.edit') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-product-hunt"></i>
+              <p>
+                Product Options
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('product.create') }}" class="nav-link {{ Route::is('product.create') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>New Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('product.index') }}" class="nav-link {{ Route::is('product.index') || Route::is ('product.edit') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Product</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           {{-- offer menu --}}
           <li class="nav-item {{ Route::is('cupon.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-angry"></i>
               <p>
-                Offer
+                Offer Options
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -102,7 +126,7 @@
           {{-- pickup point menu --}}
           <li class="nav-item {{ Route::is('pickuppoint.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-truck-pickup"></i>
               <p>
                 Pickup Point
                 <i class="fas fa-angle-left right"></i>

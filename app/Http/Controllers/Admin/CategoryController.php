@@ -66,4 +66,10 @@ class CategoryController extends Controller
         $notify = array('messege' => 'Category Delete Sucessfull !', 'alert-type' => 'success');
         return redirect()->back()->with($notify);
     }
+
+    //get child cat method
+    public function getChildcat($id){
+        $data = DB::table('childcategories')->where('subcategory_id', $id)->get();
+        return response()->json($data);
+    }
 }

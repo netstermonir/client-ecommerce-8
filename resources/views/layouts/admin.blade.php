@@ -38,6 +38,15 @@
       -webkit-box-shadow: 0 0 0px 1000px #000 inset;
       transition: background-color 5000s ease-in-out 0s;
     }
+    .selectize-control.single .selectize-input.input-active, .selectize-input {
+      background: #343a40 !important; 
+    }
+    .selectize-dropdown, .selectize-input, .selectize-input input {
+      color: #fff !important;
+    }
+    .note-editable {
+      height: 81px !important;
+    }
   </style>
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -123,6 +132,7 @@
 <!-- Select2 -->
 <script src="{{ asset('public/backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js" integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script type="text/javascript">
   $("#meta_tag").selectize({
   plugins: ["remove_button"],
@@ -136,6 +146,39 @@
   },
 });
   $("#meta_keyword").selectize({
+  plugins: ["remove_button"],
+  delimiter: ",",
+  persist: false,
+  create: function (input) {
+    return {
+      value: input,
+      text: input,
+    };
+  },
+});
+  $("#product_tag").selectize({
+  plugins: ["remove_button"],
+  delimiter: ",",
+  persist: false,
+  create: function (input) {
+    return {
+      value: input,
+      text: input,
+    };
+  },
+});
+  $("#color").selectize({
+  plugins: ["remove_button"],
+  delimiter: ",",
+  persist: false,
+  create: function (input) {
+    return {
+      value: input,
+      text: input,
+    };
+  },
+});
+  $("#size").selectize({
   plugins: ["remove_button"],
   delimiter: ",",
   persist: false,
