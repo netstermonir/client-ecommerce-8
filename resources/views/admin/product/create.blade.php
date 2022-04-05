@@ -31,7 +31,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" id="add_form">
+       <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" id="form">
         @csrf
        	<div class="row">
           <!-- left column -->
@@ -46,11 +46,11 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="p_name">Product Name <span class="text-danger">*</span> </label>
-                      <input type="text" class="form-control" name="name" {{ old('name') }} id="p_name"  required="">
+                      <input type="text" class="form-control" name="name" id="p_name"  required="">
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="p_code">Product Code <span class="text-danger">*</span> </label>
-                      <input type="text" class="form-control"  name="code" {{ old('code') }} id="p_code" required="">
+                      <input type="text" class="form-control"  name="code" id="p_code" required="">
                     </div>
                   </div>
                   <div class="row">
@@ -99,25 +99,25 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="p_unit">Unit <span class="text-danger">*</span> </label>
-                      <input type="text" class=form-control name="unit" {{ old('unit') }} id="p_unit" required="">
+                      <input type="text" class=form-control name="unit" id="p_unit" required="">
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="product_tag">Tags</label><br>
-                      <input type="text" name="tags" class="demo-default selectized" name="tags" id="product_tag" {{ old('tags') }}>
+                      <input type="text" name="tags" class="demo-default selectized" name="tags" id="product_tag">
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-4">
                       <label for="p_price">Purchase Price  </label>
-                      <input type="text" class="form-control"  name="purchase_price" id="p_price" {{ old('purchase_price') }}>
+                      <input type="text" class="form-control"  name="purchase_price" id="p_price">
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="p_s_price">Selling Price <span class="text-danger">*</span> </label>
-                      <input type="text" name="selling_price" id="p_s_price" class="form-control" required="" {{ old('selling_price') }}>
+                      <input type="text" name="selling_price" id="p_s_price" class="form-control" required>
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="d_price">Discount Price </label>
-                      <input type="text" name="discount_price" {{ old('discount_price') }} id="d_price"  class="form-control">
+                      <input type="text" name="discount_price" id="d_price"  class="form-control">
                     </div>
                   </div>
                   <div class="row">
@@ -132,32 +132,32 @@
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="stock_quantity">Stock</label>
-                      <input type="text" name="stock_quantity" id="stock_quantity"  class="form-control" {{ old('stock_quantity') }}>
+                      <input type="text" name="stock_quantity" id="stock_quantity"  class="form-control">
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="color">Color</label><br>
-                      <input type="text" class="demo-default selectized" name="color" {{ old('color') }} id="color" />
+                      <input type="text" class="demo-default selectized" name="color" id="color" />
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="size">Size</label><br>
-                      <input type="text" class="demo-default selectized" name="size" {{ old('size') }} id="size" />
+                      <input type="text" class="demo-default selectized" name="size" id="size" />
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-lg-12">
                       <label for="summernote">Product Details <span class="text-danger">*</span></label>
-                      <textarea class="form-control textarea" id="summernote" name="description" {{ old('description') }}></textarea>
+                      <textarea class="form-control textarea" id="summernote" name="description"></textarea>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-lg-12">
                       <label for="video">Video Embed Code</label>
-                      <textarea class="form-control" name="video" id="video" placeholder="Only code after embed word" {{ old('video') }}></textarea>
+                      <textarea class="form-control" name="video" id="video" placeholder="Only code after embed word"></textarea>
                       <small class="text-danger">Only code after embed word</small>
                     </div>
                   </div>
@@ -217,7 +217,7 @@
             </div>
             <!-- /.card -->
            </div>
-           <button class="btn btn-info ml-2" type="submit">Submit</button>
+           <button class="btn btn-info ml-2" type="submit" id="submit">Submit</button>
          </div>
         </form>
       </div><!-- /.container-fluid -->
@@ -261,5 +261,30 @@
            }
         });
      });
+
+     //product insert method
+    $(function(){
+      // $.ajaxSetup({
+      //   headers: {
+      //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //   }
+      //   });
+        $('#form').on('submit', function(e){
+            e.preventDefault();
+            var form_data = this;
+            $.ajax({
+                url:$(form_data).attr('action'),
+                method:$(form_data).attr('method'),
+                data:new FormData(form_data),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                success:function(data){
+                  toastr.success(data);
+                  $('#form')[0].reset();
+                }
+            });
+        });
+    });
 </script>
 @endsection

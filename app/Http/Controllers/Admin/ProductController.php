@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Auth;
 use Image;
 use DataTables;
+use File;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -79,7 +80,7 @@ class ProductController extends Controller
                 $actionbtn = '
                     <a href="'.route('product.edit', [$row->id]).'" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                     <a href="#" class="btn btn-info btn-sm show"><i class="fas fa-eye"></i></a>
-                    <a href="'.route('product.delete', [$row->id]).'" id="category-delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
+                    <a href="'.route('product.delete', [$row->id]).'" id="product_delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
                     return $actionbtn;
             })->rawColumns(['action', 'thumbnail', 'category_name', 'subcat_name', 'brand_name', 'featured', 'today_deal', 'status'])->make(true);
         }
@@ -165,8 +166,7 @@ class ProductController extends Controller
        $data ['created_at'] = Carbon::now();
        $data ['updated_at'] = Carbon::now();
        DB::table('products')->insert($data);
-       $notify = array('messege' => 'Product Create Sucessfull !', 'alert-type' => 'success');
-       return redirect()->back()->with($notify);
+       return response()->json('Product Create Sucessfull');
     }
 
     //product not featured method
@@ -218,6 +218,14 @@ class ProductController extends Controller
 
     //product delete method
     public function destroy($id){
+        // $data = DB::table('products')->where('id', $id)->first();
+        // $main_image = $data->thumbnail;
+        // $image = $data->images;
+        // if (File::exists($main_image || $image)) {
+        //     unlink($main_image || $image);
+        //     DB::table('products')->where('id', $id)->delete();
+        //     return response()->json('Product Delete Successfull !');
+        // }
         DB::table('products')->where('id', $id)->delete();
         return response()->json('Product Delete Successfull !');
     }

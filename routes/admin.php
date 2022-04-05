@@ -67,7 +67,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::get("/", "ProductController@index")->name("product.index");
         Route::get("/create", "ProductController@create")->name("product.create");
         Route::post("/store", "ProductController@store")->name("product.store");
-        Route::get("/delete/{id}", "ProductController@destroy")->name("product.delete");
+        Route::delete('/delete/{id}','ProductController@destroy')->name('product.delete');
+        // Route::get("/delete/{id}", "ProductController@destroy")->name("product.delete");
         Route::get("/edit/{id}", "ProductController@edit")->name("product.edit");
         // Route::post("/update", "BrandController@update")->name("brand.update");
         Route::get("/not-featured/{id}", "ProductController@notfeatured");
