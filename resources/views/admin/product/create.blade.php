@@ -217,7 +217,7 @@
             </div>
             <!-- /.card -->
            </div>
-           <button class="btn btn-info ml-2" type="submit" id="submit">Submit</button>
+           <button class="btn btn-info ml-2" type="submit" id="submit"><span class="d-none loader">...Loading...</span><span class="btn_submit">Submit</span></button>
          </div>
         </form>
       </div><!-- /.container-fluid -->
@@ -271,6 +271,7 @@
       //   });
         $('#form').on('submit', function(e){
             e.preventDefault();
+            $('.loading').removeClass('d-none');
             var form_data = this;
             $.ajax({
                 url:$(form_data).attr('action'),
@@ -280,6 +281,7 @@
                 dataType:'json',
                 contentType:false,
                 success:function(data){
+                  $('.loading').addClass('d-none');
                   toastr.success(data);
                   $('#form')[0].reset();
                 }

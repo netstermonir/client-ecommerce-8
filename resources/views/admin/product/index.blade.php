@@ -254,7 +254,6 @@
     $('#deleted_form').submit(function(e){
       e.preventDefault();
       var form_data = this;
-      // var request =$(this).serialize();
       $.ajax({
         url:$(form_data).attr('action'),
         method:$(form_data).attr('method'),

@@ -218,14 +218,23 @@ class ProductController extends Controller
 
     //product delete method
     public function destroy($id){
-        // $data = DB::table('products')->where('id', $id)->first();
-        // $main_image = $data->thumbnail;
-        // $image = $data->images;
-        // if (File::exists($main_image || $image)) {
-        //     unlink($main_image || $image);
-        //     DB::table('products')->where('id', $id)->delete();
-        //     return response()->json('Product Delete Successfull !');
-        // }
+        $data = DB::table('products')->where('id', $id)->first();
+        if ($data) {
+            $main_image = "public/files/product/".$data->thumbnail;
+            if (File::exists($main_image)) {
+                unlink($main_image);
+            }
+            // multiple image delete
+            $images = json_decode($data->images, true);
+            foreach($images as $image){
+
+               $image_path = "public/files/product/".$image;
+
+               if (File::exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
+        }
         DB::table('products')->where('id', $id)->delete();
         return response()->json('Product Delete Successfull !');
     }
