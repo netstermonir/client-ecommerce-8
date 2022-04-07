@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/plugins/slick-1.8.0/slick.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/responsive.css">
+    <link rel="stylesheet" href="{{asset('public/backend/plugins/toastr/toastr.min.css')}}">
 </head>
 
 <body>
@@ -43,17 +44,59 @@
                         <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/phone.png" alt=""></div>+38 068 005 3570</div>
                         <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/mail.png" alt=""></div><a href="https://colorlib.com/cdn-cgi/l/email-protection#234542505750424f465063444e424a4f0d404c4e"><span class="__cf_email__" data-cfemail="34525547404755585147745359555d581a575b59">ecom@gmail.com</span></a></div>
                         <div class="top_bar_content ml-auto">
+                            @if(Auth::check())
                             <div class="top_bar_menu">
                                 <ul class="standard_dropdown top_bar_dropdown">
                                     <li>
-                                        <a href="#">Language<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">English</a></li>
-                                            <li><a href="#">Bangla</a></li>
+                                        <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
+                                        <ul style="width: 300px; padding: 10px; left: -100px;">
+                                            <li><a href="{{ route('home') }}">Profile</a></li>
+                                            <li><a href="#">Setting</a></li>
+                                            <li><a href="#">Order List</a></li>
+                                            <li><a href="{{ route('customar.logout') }}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
+                             @guest
+                            <div class="top_bar_menu">
+                                <ul class="standard_dropdown top_bar_dropdown">
+                                    <li>
+                                        <a href="#">Login<i class="fas fa-user"></i></a>
+                                        <ul style="width: 300px; padding: 10px; left: -100px;">
+                                            <br>
+                                            <div class="login">
+                                                <form action="{{ route('login') }}" method="POST">
+                                                    @csrf
+                                                <div class="form-group">
+                                                    <label for="email">Email:</label>
+                                                    <input type="email" name="email" class="form-control" required id="email" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password">Password:</label>
+                                                    <input type="password" name="password" class="form-control" required id="password" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="ml-4 offset-md-1">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                                            <label class="form-check-label" for="remember">
+                                                                {{ __('Remember Me') }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" style="cursor:pointer;" class="form-control btn btn-sm btn-info">Login</button>
+                                                </div>
+                                            </form>
+                                            </div>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">Currency<i class="fas fa-chevron-down"></i></a>
+                                        <a href="#">Register<i class="fas fa-sign-out-alt"></i></a>
                                         <ul>
                                             <li><a href="#">Taka (৳)</a></li>
                                             <li><a href="#">Usd ($)</a></li>
@@ -61,11 +104,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="top_bar_user">
-                                <div class="user_icon"><img src="{{ asset('public/frontend') }}/images/user.svg" alt=""></div>
-                                <div><a href="#">Register</a></div>
-                                <div><a href="#">Sign in</a></div>
-                            </div>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -164,15 +203,26 @@
 <script src="{{ asset('public/frontend') }}/plugins/easing/easing.js"></script>
 <script src="{{ asset('public/frontend') }}/js/custom.js"></script>
 <script src="{{ asset('public/frontend') }}/js/product_custom.js"></script>
+<script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
+  @if(Session::has('messege'))
+    var type = "{{ Session::get('alert-type', 'info') }}"
+    switch(type){
+      case 'info':
+      toastr.info("{{ Session::get('messege') }}");
+      break;
+      case 'success':
+      toastr.success("{{ Session::get('messege') }}");
+      break;
+      case 'warning':
+      toastr.warning("{{ Session::get('messege') }}");
+      break;
+      case 'error':
+      toastr.error("{{ Session::get('messege') }}");
+      break;
+    }
+  @endif
 </script>
 
 </body>
