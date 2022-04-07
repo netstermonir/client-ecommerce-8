@@ -10,10 +10,6 @@ use App\Models\Review;
 
 class IndexController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("auth");
-    }
     //index page load method
     public function index(){
         $category = DB::table('categories')->get();
