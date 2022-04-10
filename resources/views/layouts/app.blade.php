@@ -96,11 +96,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">Register<i class="fas fa-sign-out-alt"></i></a>
-                                        <ul>
-                                            <li><a href="#">Taka (৳)</a></li>
-                                            <li><a href="#">Usd ($)</a></li>
-                                        </ul>
+                                        <a href="{{ route('register') }}">Register<i class="fas fa-sign-out-alt"></i></a>
                                     </li>
                                 </ul>
                             </div>

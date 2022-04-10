@@ -207,6 +207,10 @@ section
 	height: 100%;
 }
 
+.checked{
+	color: #FF9529;
+}
+
 .custom-select{
 	background: none !important;
 	height: 36px !important;

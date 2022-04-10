@@ -7,9 +7,7 @@ Auth::routes();
 Route::get("/login", function(){
     return redirect()->to('/');
 })->name('login');
-Route::get("/register", function(){
-    return redirect()->to('/');
-})->name('register');
+//{{-- Route::get("/register", function(){return redirect()->to('/');})->name('register'); --}}
 
 Route::get("/home", [App\Http\Controllers\HomeController::class,"index",])->name("home");
 Route::get("/customar/logout", [App\Http\Controllers\HomeController::class,"logout",])->name("customar.logout");

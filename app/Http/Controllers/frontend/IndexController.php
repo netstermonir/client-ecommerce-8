@@ -24,7 +24,7 @@ class IndexController extends Controller
         // similar product 
         $related_product = DB::table('products')->where('subcategory_id', $productdetails->subcategory_id)->orderBy('id', 'DESC')->take(10)->get();
         //review
-        $review = Review::where('product_id', $productdetails->id)->get();
+        $review = Review::where('product_id', $productdetails->id)->orderBy('id', 'DESC')->take(10)->get();
         return view("frontend.product-details", compact('productdetails', 'related_product', 'review'));
     }
 }
