@@ -100,7 +100,7 @@
             </ul>
           </li>
           {{-- offer menu --}}
-          <li class="nav-item {{ Route::is('cupon.index') ? 'menu-is-opening menu-open' : '' }}">
+          <li class="nav-item {{ Route::is('cupon.index') || Route::is('campaign.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-angry"></i>
               <p>
@@ -116,7 +116,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('smtp.setting') }}" class="nav-link {{ Route::is('smtp.setting') ? 'active' : '' }}">
+                <a href="{{ route('campaign.index') }}" class="nav-link {{ Route::is('campaign.index') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Campaign</p>
                 </a>

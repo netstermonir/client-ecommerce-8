@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('admin_content')
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css">
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -17,7 +18,7 @@
                <!--category insert Modal -->
               <section>
                 <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
@@ -25,7 +26,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <form action="{{ route('category.store') }}" method="POST">
+                    <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                       @csrf
                     <div class="modal-body">
                     <div class="form-group">
@@ -33,6 +34,18 @@
                       <input type="text" class="form-control" id="category_name" name="category_name" aria-describedby="cat" placeholder="Enter Category Name" required>
                       <small id="cat" class="form-text text-muted">This is Manin Category</small>
                     </div>
+                    <div class="form-group">
+                        <label for="category_name">Show on Homepage</label>
+                       <select class="form-control" name="status">
+                         <option value="1">Yes</option>
+                         <option value="0">No</option>
+                       </select>
+                        <small id="emailHelp" class="form-text text-muted">If yes it will be show on your home page</small>
+                    </div> 
+                    <div class="form-group">
+                      <label for="category_name">Category Icon</label>
+                      <input type="file" class="dropify" id="icon" name="icon" required="">
+                    </div> 
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary">Save</button>
@@ -64,7 +77,8 @@
                   <tr>
                     <th>Sl</th>
                     <th>Category Name</th>
-                    <th>Category Slug(s)</th>
+                    <th>Category Icon</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -73,7 +87,12 @@
                   <tr>
                       <td>{{ $key+1 }}</td>
                       <td>{{ $row->category_name }}</td>
-                      <td>{{ $row->category_slug }}</td>
+                      <td><img src="{{ asset($row->icon) }}" height="32" width="32"></td>
+                      <td>@if($row->status == "1")
+                           <span class="badge badge-success">Home Page</span>
+                           @else
+                           <span class="badge badge-danger">Not Home Page</span>
+                         @endif</td>
                       <td>
                         <a href="#" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#categoryeditModal" data-id="{{ $row->id }}" ><i class="fas fa-edit"></i></a>
                         <a href="{{ route('category.delete', $row->id) }}" id="category-delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
@@ -92,7 +111,7 @@
   </div>
  <!--category edit Modal -->
 <div class="modal fade" id="categoryeditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
@@ -105,6 +124,11 @@
   </div>
 </div>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"></script>
+ <script type="text/javascript">
+  $('.dropify').dropify();
+
+</script>
 <script type="text/javascript">
   $('body').on('click', '.edit', function(){
     let cat_id = $(this).data('id');

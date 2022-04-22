@@ -8,6 +8,8 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use DB;
+use Image;
+use File;
 
 class CategoryController extends Controller
 {
@@ -32,8 +34,15 @@ class CategoryController extends Controller
 
         //query builder
         $data = array();
+        $slug = Str::slug($request->category_name, '-');
         $data ['category_name']=$request->category_name;
         $data ['category_slug']=Str::slug($request->category_name, '-');
+        $data ['status']=$request->status;
+         //work with photo
+         $photo = $request->icon;
+         $photoname = $slug.'.'.$photo->getClientOriginalExtension();
+         Image::make($photo)->resize(32,32)->save('public/files/icons/' .$photoname);
+         $data ['icon'] = 'public/files/icons/' .$photoname;
         $data ['created_at'] = Carbon::now();
         $data ['updated_at'] = Carbon::now();
         DB::table('categories')->insert($data);
@@ -52,19 +61,42 @@ class CategoryController extends Controller
         //query builder
         $id = $request->id;
         $data = array();
+        $slug = Str::slug($request->category_name, '-');
         $data ['category_name']=$request->category_name;
         $data ['category_slug']=Str::slug($request->category_name, '-');
-        $data ['updated_at'] = Carbon::now();
-        DB::table('categories')->where('id', $id)->update($data);
-        $notify = array('messege' => 'Category Update Sucessfull !', 'alert-type' => 'success');
-        return redirect()->back()->with($notify);
+        $data ['status']=$request->status;
+        if ($request->icon) {
+            if (File::exists($request->old_logo)) {
+            unlink($request->old_logo);
+        }
+            $photo = $request->icon;
+            $photoname = $slug.'.'.$photo->getClientOriginalExtension();
+            // $photo->move('public/files/brand', $photoname); //without image intervention
+            Image::make($photo)->resize(32,32)->save('public/files/icons/'.$photoname);
+            $data ['icon'] = 'public/files/icons/'.$photoname;
+            $data ['updated_at'] = Carbon::now();
+            DB::table('categories')->where('id', $id)->update($data);
+            $notify = array('messege' => 'Category Update Sucessfull !', 'alert-type' => 'success');
+            return redirect()->back()->with($notify);
+        }else{
+            $data ['icon'] = $request->old_logo;
+            $data ['updated_at'] = Carbon::now();
+            DB::table('categories')->where('id', $id)->update($data);
+            $notify = array('messege' => 'Category Update Sucessfull !', 'alert-type' => 'success');
+            return redirect()->back()->with($notify);
+        }  
     }
 
     //category delete method 
     public function destroy($id){
-        DB::table('categories')->where('id', $id)->delete();
-        $notify = array('messege' => 'Category Delete Sucessfull !', 'alert-type' => 'success');
-        return redirect()->back()->with($notify);
+        $data = DB::table('categories')->where('id', $id)->first();
+        $icon = $data->icon;
+        if (File::exists($icon)) {
+            unlink($icon);
+            DB::table('categories')->where('id', $id)->delete();
+            $notify = array('messege' => 'Category Delete Sucessfull !', 'alert-type' => 'success');
+            return redirect()->back()->with($notify);
+        }
     }
 
     //get child cat method

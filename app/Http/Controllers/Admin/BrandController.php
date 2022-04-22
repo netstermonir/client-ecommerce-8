@@ -28,7 +28,14 @@ class BrandController extends Controller
                 $actionbtn = '<a href="#" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#categoryeditModal" data-id="'.$row->id.'" ><i class="fas fa-edit"></i></a>
                     <a href="'.route('brand.delete', [$row->id]).'" id="category-delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
                     return $actionbtn;
-            })->rawColumns(['action'])->make(true);
+            })->editColumn('front_page', function($row){
+                if ($row->front_page == 1) {
+                    return '<i class="fas fa-thumbs-up text-success"></i>  <span class="badge badge-success">Active</span>';
+                }
+                else{
+                    return '<i class="fas fa-thumbs-down text-danger"></i>  <span class="badge badge-danger">Inactive</span>';
+                }
+            })->rawColumns(['action', 'front_page'])->make(true);
         }
         return view('admin.category.brand.index');
     }
@@ -38,14 +45,17 @@ class BrandController extends Controller
          $validated = $request->validate([
         'brand_name' => 'required|unique:brands|max:55',
         'brand_logo' => 'required',
-    ]);
+        ]);
          $data = array();
          $slug = Str::slug($request->brand_name, '-');
          $data ['brand_name'] = $request->brand_name;
          $data ['brand_slug'] = Str::slug($request->brand_name, '-');
+         $data ['front_page'] = $request->front_page;
          //work with photo
          $photo = $request->brand_logo;
          $photoname = $slug.'.'.$photo->getClientOriginalExtension();
+         print_r($photoname);
+         return;
          // $photo->move('public/files/brand', $photoname); //without image intervention
          Image::make($photo)->resize(240,120)->save('public/files/brand/' .$photoname);
          $data ['brand_logo'] = 'public/files/brand/' .$photoname;

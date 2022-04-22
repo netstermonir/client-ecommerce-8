@@ -149,13 +149,16 @@
                     </div>
 
                     <!-- Wishlist -->
+                    @php
+                        $wishlist = DB::table('wishlists')->where('user_id', Auth::id())->count();
+                    @endphp
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                                 <div class="wishlist_icon"><img src="{{ asset('public/frontend') }}/images/heart.png" alt=""></div>
                                 <div class="wishlist_content">
                                     <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                    <div class="wishlist_count">115</div>
+                                    <div class="wishlist_count">{{ $wishlist }}</div>
                                 </div>
                             </div>
 
@@ -164,11 +167,11 @@
                                 <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                     <div class="cart_icon">
                                         <img src="{{ asset('public/frontend') }}/images/cart.png" alt="">
-                                        <div class="cart_count"><span>10</span></div>
+                                        <div class="cart_count"><span class="cart_qty"></span></div>
                                     </div>
                                     <div class="cart_content">
                                         <div class="cart_text"><a href="#">Cart</a></div>
-                                        <div class="cart_price">$85</div>
+                                        <div class="cart_price">{{ $setting->currency }}<span class="cart_total"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +204,25 @@
 <script src="{{ asset('public/frontend') }}/js/product_custom.js"></script>
 <script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
 
+<script type="text/javascript">
+    function Cart() {
+        $.ajax({
+      url: '{{ route('all.cart') }}',
+      type:'get',
+      async: false,
+      dataType: 'json',
+      success:function(data){
+        $('.cart_qty').empty();
+        $('.cart_total').empty();
+        $('.cart_qty').append(data.cart_qty);
+        $('.cart_total').append(data.cart_total);
+      }
+    });
+    }
+    $(document).ready(function (event){
+        Cart();
+    })
+</script>
 <script>
   @if(Session::has('messege'))
     var type = "{{ Session::get('alert-type', 'info') }}"

@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Campaign extends Model
 {
     use HasFactory;
-    protected $fillable = ["category_name", "category_slug", "icon", "status"];
+    protected $fillable = ["name", "image", "discount", "start_date", "end_date", "month", "year", "status"];
 }

@@ -35,6 +35,14 @@
                       <small id="brand" class="form-text text-muted">This is Brand Name</small>
                     </div>
                     <div class="form-group">
+                      <label for="front_page">Home Brand</label>
+                      <select class="form-control" name="front_page">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                      <small class="form-text text-muted">If yes it will be show on your home page</small>
+                    </div>
+                    <div class="form-group">
                       <label for="brand_logo">Brand Logo</label>
                       <input type="file" class="form-control dropify" data-height="140" id="brand_logo" name="brand_logo" aria-describedby="brand_logo" required>
                       <small id="brand_logo" class="form-text text-muted">This is Brand Logo</small>
@@ -72,6 +80,7 @@
                     <th>Brand Name</th>
                     <th>Brand Slug</th>
                     <th>Brand Logo</th>
+                    <th>Brand Home</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -128,6 +137,7 @@
   			{data: 'brand_logo', name: 'brand_logo', render: function(data, type, full, meta){
   				return "<img src=\""+data+"\" height=\"30\" />"
   			}},
+        {data: 'front_page', name: 'front_page'},
   			{data: 'action', name: 'action', oderable: true, searchable: true},
   		]
   	});

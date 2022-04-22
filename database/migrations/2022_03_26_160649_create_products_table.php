@@ -40,6 +40,8 @@ class CreateProductsTable extends Migration
             $table->integer('today_deal')->nullable();
             $table->integer('status')->nullable();
             $table->integer('product_slider')->default('0')->nullable();
+            $table->integer('product_views')->default('0')->nullable();
+            $table->integer('trendy_product')->default('0')->nullable();
             $table->integer('admin_id')->nullable();
             $table->string('date')->nullable();
             $table->string('day')->nullable();
