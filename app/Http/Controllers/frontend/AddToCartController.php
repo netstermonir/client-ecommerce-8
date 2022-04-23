@@ -47,6 +47,7 @@ class AddToCartController extends Controller
                 $data = array();
                 $data ['product_id'] = $id;
                 $data ['user_id'] = Auth::id();
+                $data ['date'] = date('d, F Y');
                 $data ['created_at'] = Carbon::now();
                 $data ['updated_at'] = Carbon::now();
                 DB::table('wishlists')->insert($data);
@@ -62,5 +63,74 @@ class AddToCartController extends Controller
             $notify = array('messege' => 'Please Login Your Account !', 'alert-type' => 'error');
             return redirect()->back()->with($notify);
         }
+    }
+
+    //whislist page 
+    public function whitelistPage(){
+        if (Auth::check()) {
+            $wishlist = DB::table('wishlists')->leftJoin('products','wishlists.product_id','products.id')->select('products.name','products.thumbnail','products.slug','wishlists.*')->where('wishlists.user_id',Auth::id())->get();
+            return view('frontend.cart-page.whishlist', compact('wishlist'));
+        }
+        else{
+            $notify = array('messege' => 'Please Login Your Account !', 'alert-type' => 'error');
+            return redirect()->back()->with($notify);
+        }
+    }
+
+    //whishlist clear method
+    public function whitelistEmpty(){
+        DB::table('wishlists')->where('user_id',Auth::id())->delete();
+        $notification=array('messege' => 'Wishlist Clear SuccessFull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+    //whislist product remove
+    public function whitelistdelete($id){
+        DB::table('wishlists')->where('id',$id)->delete();
+        $notification=array('messege' => 'WhishList Product Successfully Deleted !', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+    //cart page content method
+    public function MyCart(){
+        $cart_data = Cart::content();
+        return view('frontend.cart-page.cart', compact('cart_data'));
+    }
+
+    //cart page product remove
+    public function RemoveProduct($rowId){
+        Cart::remove($rowId);
+        return response()->json('Product Remove SuccessFull !');
+    }
+
+    //cart product qty update
+    public function CarProductqty($qty, $rowId){
+        Cart::update($rowId, ['qty' => $qty]);
+        return response()->json('Product Qty Update SuccessFull !');
+    }
+
+    //cart product size update
+    public function CarProductsize($size, $rowId){
+        $product = Cart::get($rowId);
+        $color = $product->options->color;
+        $thumbnail = $product->options->thumbnail;
+        Cart::update($rowId, ['options'  => ['size' => $size,  'color' => $color, 'thumbnail' => $thumbnail]]);
+        return response()->json('Product Color Update SuccessFull !');
+    }
+
+    //cart product color update
+    public function CarProductcolor($color, $rowId){
+        $product = Cart::get($rowId);
+        $size = $product->options->size;
+        $thumbnail = $product->options->thumbnail;
+        Cart::update($rowId, ['options'  => ['color' => $color,  'size' => $size, 'thumbnail' => $thumbnail]]);
+        return response()->json('Product Color Update SuccessFull !');
+    }
+
+    //cart clear method
+    public function CartEmpty(){
+        Cart::destroy();
+        $notify = array('messege' => 'Cart Items Clear SuccessFull !', 'alert-type' => 'success');
+        return redirect()->to('/')->with($notify);
     }
 }

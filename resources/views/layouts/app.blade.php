@@ -155,10 +155,13 @@
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                                <div class="wishlist_icon"><img src="{{ asset('public/frontend') }}/images/heart.png" alt=""></div>
+                                <div class="cart_icon">
+                                    <img src="{{ asset('public/frontend') }}/images/heart.png" alt="">
+                                    <div class="cart_count">{{ $wishlist }}</div>
+                                </div>
                                 <div class="wishlist_content">
-                                    <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                    <div class="wishlist_count">{{ $wishlist }}</div>
+                                    <div class="wishlist_text"><a href="{{ route('wishlist.page') }}">Wishlist</a></div>
+                                    
                                 </div>
                             </div>
 
@@ -170,7 +173,7 @@
                                         <div class="cart_count"><span class="cart_qty"></span></div>
                                     </div>
                                     <div class="cart_content">
-                                        <div class="cart_text"><a href="#">Cart</a></div>
+                                        <div class="cart_text"><a href="{{ route('cart.page') }}">Cart</a></div>
                                         <div class="cart_price">{{ $setting->currency }}<span class="cart_total"></span></div>
                                     </div>
                                 </div>
@@ -202,11 +205,12 @@
 <script src="{{ asset('public/frontend') }}/plugins/easing/easing.js"></script>
 <script src="{{ asset('public/frontend') }}/js/custom.js"></script>
 <script src="{{ asset('public/frontend') }}/js/product_custom.js"></script>
+<script src="{{ asset('public/frontend') }}/js/cart_custom.js"></script>
 <script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
 
 <script type="text/javascript">
     function Cart() {
-        $.ajax({
+      $.ajax({
       url: '{{ route('all.cart') }}',
       type:'get',
       async: false,

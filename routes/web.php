@@ -22,8 +22,24 @@ Route::group(['namespace' => 'App\Http\Controllers\frontend'], function(){
     Route::post("/addtocart", 'AddToCartController@AddToCart')->name('add.to.cart.quickview');
     //cart total and qty
     Route::get("/allCart", 'AddToCartController@AllCart')->name('all.cart');
+    //cart product remove
+    Route::get('/cartproduct/remove/{rowId}', 'AddToCartController@RemoveProduct');
+    // Cart product update
+    Route::get('/cartproduct/updateqty/{qty}/{rowId}', 'AddToCartController@CarProductqty');
+    Route::get('/cartproduct/updatesize/{size}/{rowId}', 'AddToCartController@CarProductsize');
+    Route::get('/cartproduct/updatecolor/{color}/{rowId}', 'AddToCartController@CarProductcolor');
+    Route::get("/CartPage", 'AddToCartController@MyCart')->name('cart.page');
+    Route::get("/CartClear", 'AddToCartController@CartEmpty')->name('cart.empty');
     //wishlist
     Route::get("/wishlist/add/{id}", 'AddToCartController@addwishlist')->name('add.wishlist');
+    Route::get("/wishlistPage", 'AddToCartController@whitelistPage')->name('wishlist.page');
+    Route::get("/wishlistClear", 'AddToCartController@whitelistEmpty')->name('wishlist.empty');
+    Route::get("/wishlist/product/delete/{id}", 'AddToCartController@whitelistdelete')->name('whishlistproduct.delete');
     //review route
     Route::post("/review/store", 'ReviewController@store')->name('review.store');
+});
+
+//cart data destroy
+Route::get('/cart/destroy', function() {
+    Cart::destroy();
 });

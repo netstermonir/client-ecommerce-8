@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-lg-4" style="margin-left: -5px;">
                                   <label>Quantity: </label>
-                                    <input type="number" min="1" max="100" name="qty" class="form-control-sm" value="1" style="min-width: 120px; margin-left: -4px;">
+                                    <input type="number" min="1" name="qty" class="form-control-sm" value="1" style="min-width: 120px; margin-left: -4px;">
                                 </div>
                             </div>
                         <div class="button_container">
