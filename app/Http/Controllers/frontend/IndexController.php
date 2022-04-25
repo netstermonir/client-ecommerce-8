@@ -41,4 +41,44 @@ class IndexController extends Controller
         $product = Product::where('id', $id)->first();
         return view('frontend.product.quick_view', compact('product'));
     }
+
+    //category wise product show method
+    public function CategoryWise($id){
+        $cat_name = DB::table('categories')->where('id', $id)->first();
+        $subcat = DB::table('subcategories')->where('category_id', $id)->get();
+        $brand = DB::table('brands')->get();
+        $product = DB::table('products')->where('category_id', $id)->paginate(50);
+        $random = Product::where('status', 1)->inRandomOrder()->limit(50)->get();
+        return view('frontend.product.categorywise_product', compact('cat_name','subcat', 'brand', 'product','random'));
+    }
+
+    //sub category wise product show method
+    public function SubCategoryWise($id){
+        $subcat_name = DB::table('subcategories')->where('id', $id)->first();
+        $childcat = DB::table('childcategories')->where('subcategory_id', $id)->get();
+        $brand = DB::table('brands')->get();
+        $product = DB::table('products')->where('subcategory_id', $id)->paginate(50);
+        $random = Product::where('status', 1)->inRandomOrder()->limit(50)->get();
+        return view('frontend.product.subcategorywise_product', compact('subcat_name','childcat', 'brand', 'product','random'));
+    }
+
+    //child category wise product show method
+    public function ChildCategoryWise($id){
+        $childcat_name = DB::table('childcategories')->where('id', $id)->first();
+        $categories = DB::table('categories')->where('id', $id)->get();
+        $brand = DB::table('brands')->get();
+        $product = DB::table('products')->where('childcategory_id', $id)->paginate(50);
+        $random = Product::where('status', 1)->inRandomOrder()->limit(50)->get();
+        return view('frontend.product.childcategorywise_product', compact('childcat_name','categories', 'brand', 'product','random'));
+    }
+
+    //brand wise product show method
+    public function BandCategoryWise($id){
+        $brand_name = DB::table('brands')->where('id', $id)->first();
+        $categories = DB::table('categories')->get();
+        $brand = DB::table('brands')->get();
+        $product = DB::table('products')->where('brand_id', $id)->paginate(50);
+        $random = Product::where('status', 1)->inRandomOrder()->limit(50)->get();
+        return view('frontend.product.brandwise_product', compact('brand_name','categories', 'brand', 'product','random'));
+    }
 }

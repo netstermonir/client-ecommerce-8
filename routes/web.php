@@ -37,9 +37,10 @@ Route::group(['namespace' => 'App\Http\Controllers\frontend'], function(){
     Route::get("/wishlist/product/delete/{id}", 'AddToCartController@whitelistdelete')->name('whishlistproduct.delete');
     //review route
     Route::post("/review/store", 'ReviewController@store')->name('review.store');
-});
-
-//cart data destroy
-Route::get('/cart/destroy', function() {
-    Cart::destroy();
+    //category wise product show 
+    Route::get("/categorywise/product/{id}", 'IndexController@CategoryWise')->name('categorywise.product');
+    Route::get("/subcategorywise/product/{id}", 'IndexController@SubCategoryWise')->name('subcategorywise.product');
+    Route::get("/childcategorywise/product/{id}", 'IndexController@ChildCategoryWise')->name('childcategorywise.product');
+    //brand wise product show
+    Route::get("/brandcategorywise/product/{id}", 'IndexController@BandCategoryWise')->name('brandwise.product');
 });

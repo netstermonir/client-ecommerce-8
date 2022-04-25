@@ -131,6 +131,6 @@ class AddToCartController extends Controller
     public function CartEmpty(){
         Cart::destroy();
         $notify = array('messege' => 'Cart Items Clear SuccessFull !', 'alert-type' => 'success');
-        return redirect()->to('/')->with($notify);
+        return redirect()->back()->with($notify);
     }
 }

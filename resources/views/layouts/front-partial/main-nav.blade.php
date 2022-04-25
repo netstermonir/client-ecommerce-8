@@ -20,18 +20,18 @@
                                         $subcat = DB::table('subcategories')->where('category_id', $row->id)->get();    
                                      @endphp
                                     <li class="hassubs">
-                                        <a href="#"><img src="{{ asset($row->icon) }}" height="18" width="22">{{ "" }}{{ $row->category_name }}<i class="fas fa-chevron-right"></i></a>
+                                        <a href="{{ route('categorywise.product', $row->id) }}"><img src="{{ asset($row->icon) }}" height="18" width="22">{{ "" }}{{ $row->category_name }}<i class="fas fa-chevron-right"></i></a>
                                         <ul>
                                             @foreach($subcat as $row)
                                             @php
                                                 $childcat = DB::table('childcategories')->where('subcategory_id', $row->id)->get();
                                             @endphp
                                             <li class="hassubs">
-                                                <a href="#">{{ $row->subcat_name }}<i class="fas fa-chevron-right"></i></a>
+                                                <a href="{{ route('subcategorywise.product', $row->id) }}">{{ $row->subcat_name }}<i class="fas fa-chevron-right"></i></a>
                                                 <ul>
                                                     @foreach($childcat as $row)
                                                         <li>
-                                                            <a href="#">{{ $row->childcategory_name }}  
+                                                            <a href="{{ route('childcategorywise.product', $row->id) }}">{{ $row->childcategory_name }}  
                                                             </a>
                                                     </li>
                                                     @endforeach

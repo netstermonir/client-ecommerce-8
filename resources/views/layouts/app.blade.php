@@ -206,6 +206,9 @@
 <script src="{{ asset('public/frontend') }}/js/custom.js"></script>
 <script src="{{ asset('public/frontend') }}/js/product_custom.js"></script>
 <script src="{{ asset('public/frontend') }}/js/cart_custom.js"></script>
+<script src="{{ asset('public/frontend') }}/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="{{ asset('public/frontend') }}/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="{{ asset('public/frontend') }}/js/shop_custom.js"></script>
 <script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
 
 <script type="text/javascript">
