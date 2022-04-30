@@ -58,7 +58,7 @@ class LoginController extends Controller
                     ->with("success", "Admin Login Successfull");
             } else {
                 return redirect()
-                    ->route("home")
+                    ->route("profile")
                     ->with("erorr", "You Not a Admin");
             }
         } else {

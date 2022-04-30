@@ -24,13 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view("home");
+        return view("profile");
     }
 
     //customar logout method
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
-        $notify = array('messege' => 'Customar Logout Sucessfull !', 'alert-type' => 'success');
-        return redirect()->back()->with($notify);
+        $notify = [
+            "messege" => "Customar Logout Sucessfull !",
+            "alert-type" => "success",
+        ];
+        return redirect()
+            ->back()
+            ->with($notify);
     }
 }

@@ -30,9 +30,9 @@
 <body>
 
 <div class="super_container">
-    
+
     <!-- Header -->
-    
+
     <header class="header">
 
         <!-- Top Bar -->
@@ -50,7 +50,7 @@
                                     <li>
                                         <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
                                         <ul style="width: 300px; padding: 10px; left: -100px;">
-                                            <li><a href="{{ route('home') }}">Profile</a></li>
+                                            <li><a href="{{ route('profile') }}">Profile</a></li>
                                             <li><a href="#">Setting</a></li>
                                             <li><a href="#">Order List</a></li>
                                             <li><a href="{{ route('customar.logout') }}">Logout</a></li>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                 </div>
-            </div>      
+            </div>
         </div>
 
         <!-- Header Main -->
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="wishlist_content">
                                     <div class="wishlist_text"><a href="{{ route('wishlist.page') }}">Wishlist</a></div>
-                                    
+
                                 </div>
                             </div>
 
@@ -185,7 +185,7 @@
         </div>
         @yield('main-nav')
     </header>
-    
+
     @yield('content')
 
     <!-- Footer -->
