@@ -15,7 +15,8 @@ class CheckoutController extends Controller
     public function checkout()
     {
         if (Auth::check()) {
-            return view("frontend.cart-page.checkout");
+            $content = Cart::content();
+            return view("frontend.cart-page.checkout", compact("content"));
         } else {
             $notify = [
                 "messege" => "Login Your Account First !",
@@ -30,13 +31,10 @@ class CheckoutController extends Controller
     //apply coupon code ajax
     public function Coupon(Request $request)
     {
-        $coupon = $request->coupon;
         $check = DB::table("cupons")
-            ->where("coupon_code", $coupon)
+            ->where("coupon_code", $request->coupon)
             ->first();
-        if (!$check) {
-            return response()->json("Invalide Coupon Code");
-        } else {
+        if ($check) {
             if (
                 date("Y-m-d", strtotime(date("Y-m-d"))) <=
                 date("Y-m-d", strtotime($check->valid_date))
@@ -44,8 +42,8 @@ class CheckoutController extends Controller
                 Session::put("coupon", [
                     "name" => $check->coupon_code,
                     "discount" => $check->coupon_amount,
-                    // "after_discount" =>
-                    //     Cart::subtotal() * $check->coupon_amount,
+                    "after_discount" =>
+                        Cart::subtotal() - $check->coupon_amount,
                 ]);
                 return response()->json([
                     "success" => "Coupon Apply Successfull !",
@@ -55,6 +53,18 @@ class CheckoutController extends Controller
                     "error" => "Coupon Expired !",
                 ]);
             }
+        } else {
+            return response()->json("Invalide Coupon Code");
         }
+    }
+
+    //coupon remove
+    public function Couponremove()
+    {
+        session::forget("coupon");
+        $notify = ["messege" => "Coupon Removed !", "alert-type" => "success"];
+        return redirect()
+            ->back()
+            ->with($notify);
     }
 }

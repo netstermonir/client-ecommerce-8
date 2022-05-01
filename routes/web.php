@@ -119,7 +119,12 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::get("page/checkout", "CheckoutController@Checkout")->name(
         "checkout"
     );
+    //apply coupon check
     Route::post("apply/coupon", "CheckoutController@Coupon")->name(
         "apply.coupon"
+    );
+    //coupon remove coupon.remove
+    Route::get("coupon/remove", "CheckoutController@Couponremove")->name(
+        "coupon.remove"
     );
 });
