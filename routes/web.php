@@ -107,4 +107,19 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
         "customer/password/change",
         "ProfileController@passwordChange"
     )->name("customar.passwordChange");
+    //page view route
+    Route::get("page/view/{page_slug}", "IndexController@viewPage")->name(
+        "view.page"
+    );
+    // newsletter route
+    Route::post("newsletter", "IndexController@Newsletter")->name(
+        "newsletter.store"
+    );
+    //checkout route
+    Route::get("page/checkout", "CheckoutController@Checkout")->name(
+        "checkout"
+    );
+    Route::post("apply/coupon", "CheckoutController@Coupon")->name(
+        "apply.coupon"
+    );
 });

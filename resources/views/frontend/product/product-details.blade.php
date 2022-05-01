@@ -58,7 +58,7 @@
 							@endif
 						</div>
 						<div class="rating_r rating_r_4 product_rating">
-							@if($sum_rating !=NULL)	
+							@if($sum_rating !=NULL)
 						 	@if(intval($sum_rating/$count_rating) == 5)
 						 	<span class="fa fa-star checked"></span>
 						 	<span class="fa fa-star checked"></span>
@@ -133,11 +133,11 @@
 								      		<!-- Product Size -->
 										<label class="ml-2">Pick Size: </label>
 											<select class="custom-select form-control-sm" name="size" style="min-width: 120px;">
-												
+
 												@foreach($sizes as $size)
 												   <option value="{{ $size }}">{{ $size }}</option>
 												@endforeach
-												
+
 											</select>
 								    	</div>
 								    @endisset
@@ -166,7 +166,7 @@
 	                                @endif
 									<a class="product_fav_single" title="wishlist" href="{{ route('add.wishlist', $productdetails->id) }}"><i class="far fa-heart"></i></a>
 								</div>
-								
+
 							</form>
 						</div>
 					</div>
@@ -208,15 +208,15 @@
 			  <div class="card-header">
 				<h4>Ratings & Reviews of : {{ $productdetails->name }} </h4>
 			  </div>
-			  
+
 
 
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-3">
 							Average Review of  :<br>
-						
-						@if($sum_rating !=NULL)	
+
+						@if($sum_rating !=NULL)
 						 	@if(intval($sum_rating/$count_rating) == 5)
 						 	<span class="fa fa-star checked"></span>
 						 	<span class="fa fa-star checked"></span>
@@ -248,7 +248,7 @@
 						 	<span class="fa fa-star "></span>
 						 	<span class="fa fa-star "></span>
 						 	@endif
-						@endif 	
+						@endif
 						</div>
 						<div class="col-md-3">
 
@@ -298,8 +298,8 @@
 											<span class="fa fa-star "></span>
 											<span> Total: ({{ $review_1 }}) </span>
 										</div>
-										
-									
+
+
 						</div>
 						<div class="col-lg-6">
 							<form action="{{ route('review.store') }}" method="post">
@@ -318,8 +318,8 @@
 							     	<option value="3">3 star</option>
 							     	<option value="4">4 star</option>
 							     	<option value="5">5 star</option>
-							     </select> 
-							     
+							     </select>
+
 							  </div>
 							  @if(Auth::check())
 							  <button style="cursor: pointer;" type="submit" class="btn btn-sm btn-info"><span class="fa fa-star "></span> submit review</button>
@@ -331,7 +331,7 @@
 					</div>
 						<br>
 
-					{{-- all review of this product --}}	
+					{{-- all review of this product --}}
 						<strong>All review of : {{ $productdetails->name }}</strong> <hr>
 					<div class="row">
 						@foreach($review as $row)
@@ -386,11 +386,11 @@
 												<span>(1)</span>
 											@endif
 										</div>
-									@endif	
+									@endif
 							 	</div>
 						 </div>
 					  @endforeach
-					</div>	
+					</div>
 				</div>
 
 
@@ -403,7 +403,7 @@
 			</div>
 			</div>
 		</div><br>
-			
+
 		</div>
 	</div>
 
@@ -422,7 +422,7 @@
 					</div>
 
 					<div class="viewed_slider_container">
-						
+
 						<!-- Recently Viewed Slider -->
 						<div class="owl-carousel owl-theme viewed_slider">
 							@foreach($related_product as $row)
@@ -472,5 +472,5 @@
       }
     });
   });
-</script> 
+</script>
 @endsection

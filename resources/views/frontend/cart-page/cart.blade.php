@@ -75,7 +75,7 @@
 								@endforeach
 							</ul>
 						</div>
-						
+
 						<!-- Order Total -->
 						<div class="order_total">
 							<div class="order_total_content text-md-right">
@@ -91,7 +91,7 @@
 								<a href="{{ route('cart.empty') }}" class="text-white">Clear Cart</a>
 							</button>
 							<button type="button" class="button cart_button_checkout">
-								<a href="">Checkout</a>
+								<a href="{{ route('checkout') }}">Checkout</a>
 							</button>
 						</div>
 					</div>

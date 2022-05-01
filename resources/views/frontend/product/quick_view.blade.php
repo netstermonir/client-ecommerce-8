@@ -89,7 +89,7 @@
                                     	</select>
                                     </div>
                                     @endisset
-                                    
+
                                 </div>
                                 <div class="col-lg-4" style="margin-left: -5px;">
                                   <label>Quantity: </label>
@@ -108,13 +108,13 @@
                               </div>
                             </div>
                         </div>
-                        
+
                     </form>
                  </div>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
         <script type="text/javascript">
 $('.loader').ready(function() {
@@ -123,7 +123,7 @@ $('.loader').ready(function() {
     $('.loader').css("display", "none");
   }, 500);
 });
-</script>  
+</script>
 
 <script type="text/javascript">
   //store coupon ajax call
@@ -145,4 +145,4 @@ $('.loader').ready(function() {
       }
     });
   });
-</script>   
+</script>

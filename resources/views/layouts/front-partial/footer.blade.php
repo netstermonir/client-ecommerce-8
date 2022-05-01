@@ -1,3 +1,7 @@
+@php
+    $page_one = DB::table('pages')->where('page_position', 1)->get();
+    $page_two = DB::table('pages')->where('page_position', 2)->get();
+@endphp
 <footer class="footer">
         <div class="container">
             <div class="row">
@@ -15,11 +19,13 @@
                         </div>
                         <div class="footer_social">
                             <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                                <li><a href="{{ $setting->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="{{ $setting->linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="{{ $setting->youtube }}" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="{{ $setting->pinterest }}" target="_blank"><i class="fab fa-pinterest"></i></a></li>
+                                <li><a href="{{ $setting->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="{{ $setting->whatsapp }}" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="{{ $setting->messenger }}" target="_blank"><i class="fab fa-messenger"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -27,29 +33,26 @@
 
                 <div class="col-lg-2 offset-lg-2">
                     <div class="footer_column">
-                        <div class="footer_title">Find it Fast</div>
+                        <div class="footer_title">Other Page</div>
                         <ul class="footer_list">
-                            <li><a href="#">Computers & Laptops</a></li>
-                            <li><a href="#">Cameras & Photos</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Smartphones & Tablets</a></li>
-                            <li><a href="#">TV & Audio</a></li>
-                        </ul>
-                        <div class="footer_subtitle">Gadgets</div>
-                        <ul class="footer_list">
-                            <li><a href="#">Car Electronics</a></li>
+                            @foreach ($page_one as $row)
+                                <li>
+                                    <a href="{{ route('view.page', $row->page_slug) }}">{{ $row->page_name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-2">
                     <div class="footer_column">
-                        <ul class="footer_list footer_list_2">
-                            <li><a href="#">Video Games & Consoles</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Cameras & Photos</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Computers & Laptops</a></li>
+                        <div class="footer_title">Important Page</div>
+                        <ul class="footer_list">
+                            @foreach ($page_two as $row)
+                                <li>
+                                    <a href="#">{{ $row->page_name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -61,10 +64,8 @@
                             <li><a href="#">My Account</a></li>
                             <li><a href="#">Order Tracking</a></li>
                             <li><a href="#">Wish List</a></li>
-                            <li><a href="#">Customer Services</a></li>
-                            <li><a href="#">Returns / Exchange</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Product Support</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Become a Vendor</a></li>
                         </ul>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    
+
                     <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
                         <div class="copyright_content">
 Copyright &copy;<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://templatespoint.net/" target="_blank">TemplatesPoint</a>

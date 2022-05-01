@@ -618,8 +618,9 @@
                             <div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
                         </div>
                         <div class="newsletter_content clearfix">
-                            <form action="#" class="newsletter_form">
-                                <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
+                            <form action="{{ route('newsletter.store') }}" class="newsletter_form" id="newsletters_form" method="post">
+                                @csrf
+                                <input type="text" name="email" class="newsletter_input" required="required" placeholder="Enter your email address">
                                 <button class="newsletter_button">Subscribe</button>
                             </form>
                             <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
@@ -645,8 +646,6 @@
     </div>
   </div>
 </div>
-@endsection
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).on('click', '.quick_view', function(){
@@ -659,4 +658,28 @@
            }
         });
        });
+        //store newsletter ajax call
+  $('#newsletters_form').submit(function(e){
+    e.preventDefault();
+    var url = $(this).attr('action');
+    var request =$(this).serialize();
+    $.ajax({
+      url:url,
+      type:'post',
+      async:false,
+      data:request,
+      success:function(data){
+        if(data.success){
+            toastr.success(data.success);
+        }
+        if(data.error){
+            toastr.error(data.error);
+        }
+        $('#newsletters_form')[0].reset();
+      }
+    });
+  });
 </script>
+@endsection
+
+

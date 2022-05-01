@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Review;
 
@@ -188,5 +189,33 @@ class IndexController extends Controller
             "frontend.product.brandwise_product",
             compact("brand_name", "categories", "brand", "product", "random")
         );
+    }
+
+    //page view method
+    public function viewPage($page_slug)
+    {
+        $page = DB::table("pages")
+            ->where("page_slug", $page_slug)
+            ->first();
+        return view("frontend.page", compact("page"));
+    }
+
+    //newsletter store method
+    public function Newsletter(Request $request)
+    {
+        $email = $request->email;
+        $check = DB::table("newslatters")
+            ->where("email", $email)
+            ->first();
+        if (!$check) {
+            $data = [];
+            $data["email"] = $request->email;
+            $data["created_at"] = Carbon::now();
+            $data["updated_at"] = Carbon::now();
+            DB::table("newslatters")->insert($data);
+            return response()->json(["success" => "Thanks for Subscribe !"]);
+        } else {
+            return response()->json(["error" => "Already Subscribed !"]);
+        }
     }
 }
