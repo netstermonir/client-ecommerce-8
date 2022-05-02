@@ -131,4 +131,5 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::post("order/place", "CheckoutController@orderPlcae")->name(
         "order.place"
     );
+    Route::get("invoice", "CheckoutController@index")->name("invoice");
 });

@@ -9,6 +9,8 @@ use Auth;
 use Session;
 use Cart;
 use Carbon\Carbon;
+use Mail;
+use App\Mail\InvoiceMail;
 
 class CheckoutController extends Controller
 {
@@ -113,6 +115,8 @@ class CheckoutController extends Controller
         $order["created_at"] = Carbon::now();
         $order["updated_at"] = Carbon::now();
         $order_id = DB::table("orders")->insertGetId($order);
+        // send mail
+        Mail::to($request->c_email)->send(new InvoiceMail($order));
         //order details table
         $content = Cart::content();
         $details = [];
@@ -142,5 +146,9 @@ class CheckoutController extends Controller
         return redirect()
             ->to("profile")
             ->with($notify);
+    }
+    public function index()
+    {
+        return view("frontend.mail.invoice");
     }
 }
