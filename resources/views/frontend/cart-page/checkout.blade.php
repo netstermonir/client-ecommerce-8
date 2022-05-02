@@ -14,7 +14,7 @@
 					<div class="cart_container card p-1">
 						<div class="cart_title text-center">Billing Address</div>
 
-						  <form action="" method="post" id="order-place">
+						  <form action="{{ route('order.place') }}" method="post" id="order_place">
 						  	@csrf
 							<div class="row p-4">
 							  <div class="form-group col-lg-6">
@@ -102,7 +102,7 @@
 							<div class="p-4">
 							  <div class="form-group">
 								<label>Coupon Apply</label>
-								<input type="text" class="form-control" name="coupon" required="" placeholder="Coupon Code" autocomplete="off">
+								<input type="text" class="form-control" name="coupon" required="" placeholder="Coupon Code" autocomplete="off" id="coupon">
 							  </div>
 							  <div class="form-group">
 							  	<button type="submit" class="btn btn-info">Apply Coupon</button>
@@ -121,13 +121,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 
-		 $('#order-place').submit(function(e) {
-             $('.progress').removeClass('d-none');
-        });
         $('#apply_coupon').submit(function(e){
             e.preventDefault();
             var url = $(this).attr('action');
-            var request =$(this).serialize();
+            var request = $(this).serialize();
             $.ajax({
             url:url,
             type:'post',
@@ -138,13 +135,34 @@
                     toastr.success(data.success);
                     location.reload();
                 }
+                if(data.error){
+                    toastr.error(data.error);
+                }
                 else{
-                    toastr.error(data);
+                    toastr.error(data.errormessage);
                 }
                 $('#apply_coupon')[0].reset();
             }
             });
         });
+        // $('#order_place').submit(function(e){
+        //     e.preventDefault();
+        //     var url = $(this).attr('action');
+        //     var request = $(this).serialize();
+        //     $.ajax({
+        //     url:url,
+        //     type:'post',
+        //     async:false,
+        //     data:request,
+        //     success:function(data){
+        //         if(data.success){
+        //             toastr.success(data.success);
+        //             location.reload();
+        //         }
+        //         $('#order_place')[0].reset();
+        //     }
+        //     });
+        // });
 	</script>
 
 @endsection

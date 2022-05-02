@@ -127,4 +127,8 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::get("coupon/remove", "CheckoutController@Couponremove")->name(
         "coupon.remove"
     );
+    // order place route and payment
+    Route::post("order/place", "CheckoutController@orderPlcae")->name(
+        "order.place"
+    );
 });
