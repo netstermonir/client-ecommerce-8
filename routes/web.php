@@ -97,6 +97,7 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::get("website/review", "ProfileController@websiteReview")->name(
         "write.review"
     );
+    Route::get("my/order", "ProfileController@myOrder")->name("myorder");
     Route::post("website/review/store", "ProfileController@Review")->name(
         "websitereview.store"
     );

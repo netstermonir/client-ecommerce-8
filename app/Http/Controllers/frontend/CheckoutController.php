@@ -115,8 +115,6 @@ class CheckoutController extends Controller
         $order["created_at"] = Carbon::now();
         $order["updated_at"] = Carbon::now();
         $order_id = DB::table("orders")->insertGetId($order);
-        // send mail
-        Mail::to($request->c_email)->send(new InvoiceMail($order));
         //order details table
         $content = Cart::content();
         $details = [];
@@ -133,6 +131,10 @@ class CheckoutController extends Controller
             $details["created_at"] = Carbon::now();
             $details["updated_at"] = Carbon::now();
             DB::table("order_details")->insert($details);
+            // send mail
+            Mail::to($request->c_email)->send(
+                new InvoiceMail($order, $details)
+            );
         }
         Cart::destroy();
         if (Session::has("coupon")) {

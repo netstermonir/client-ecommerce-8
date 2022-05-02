@@ -98,4 +98,13 @@ class ProfileController extends Controller
                 ->with($notify);
         }
     }
+    //myorder show method
+    public function myOrder()
+    {
+        $orders = DB::table("orders")
+            ->where("user_id", Auth::id())
+            ->orderBy("id", "DESC")
+            ->get();
+        return view("user.myOrder", compact("orders"));
+    }
 }

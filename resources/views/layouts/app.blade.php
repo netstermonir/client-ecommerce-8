@@ -41,8 +41,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col d-flex flex-row">
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/phone.png" alt=""></div>+38 068 005 3570</div>
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/mail.png" alt=""></div><a href="https://colorlib.com/cdn-cgi/l/email-protection#234542505750424f465063444e424a4f0d404c4e"><span class="__cf_email__" data-cfemail="34525547404755585147745359555d581a575b59">ecom@gmail.com</span></a></div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/phone.png" alt=""></div>01747706163</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/mail.png" alt=""></div><a href=""><span class="__cf_email__" data-cfemail="">ecom@gmail.com</span></a></div>
                         <div class="top_bar_content ml-auto">
                             @if(Auth::check())
                             <div class="top_bar_menu">
@@ -116,7 +116,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2 col-sm-3 col-3 order-1">
                         <div class="logo_container">
-                            <div class="logo"><a href="{{ url('/') }}">OneTech</a></div>
+                            <div class="logo"><a href="{{ url('/') }}">Online</a></div>
                         </div>
                     </div>
 

@@ -40,23 +40,35 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th class="center">#</th>
+                                <th class="center">No</th>
+                                <th class="center">Image</th>
                                 <th>Item</th>
-                                <th>Description</th>
-                                <th class="right">Price</th>
+                                <th class="right">Color</th>
+                                <th class="right">Size</th>
                                 <th class="center">Qty</th>
-                                <th class="right">Total</th>
+                                <th class="right">Price</th>
                             </tr>
                         </thead>
+                        @php
+                            $total = 0;
+                            // $order_details = json_decode($order['order_details'], true);
+                            $order_details = DB::table('order_details')->get();
+
+                        @endphp
                         <tbody>
+                            @foreach ($order_details as $row)
                             <tr>
-                                <td class="center">1</td>
-                                <td class="left strong">Iphone 10X</td>
-                                <td class="left">Iphone 10X with headphone</td>
-                                <td class="right">$1500</td>
-                                <td class="center">10</td>
-                                <td class="right">$15,000</td>
+                                <td class="center">{{ $total++ }}</td>
+                                <td class="center">
+                                    <img src="{{ asset('public/files/product/'.$row->product_image) }}" alt="{{ $row->product_name }}" width="60">
+                                </td>
+                                <td class="left strong">{{ $row->product_name }}</td>
+                                <td class="right">{{ $row->color }}</td>
+                                <td class="right">{{ $row->size }}</td>
+                                <td class="center">{{ $row->quantity }}</td>
+                                <td class="right">{{ $row->product_price }}{{ $setting->currency }}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -66,31 +78,25 @@
                     <div class="col-lg-4 col-sm-5 ml-auto">
                         <table class="table table-clear">
                             <tbody>
+
                                 <tr>
                                     <td class="left">
-                                        <strong class="text-dark">Subtotal</strong>
+                                        <strong class="text-dark">Shipping</strong>
                                     </td>
-                                    <td class="right">$28,809,00</td>
+                                    <td class="right">{{ $order['shipping_charge'] }}{{ $setting->currency }}</td>
                                 </tr>
                                 <tr>
                                     <td class="left">
-                                        <strong class="text-dark">Discount (20%)</strong>
+                                        <strong class="text-dark">Tax</strong>
                                     </td>
-                                    <td class="right">$5,761,00</td>
+                                    <td class="right">{{ $order['tax'] }}{{ $setting->currency }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td class="left">
-                                        <strong class="text-dark">VAT (10%)</strong>
+                                        <strong class="text-dark">Total</strong>
                                     </td>
-                                    <td class="right">$2,304,00</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong class="text-dark">Total</strong> </td>
-                                    <td class="right">
-                                        <strong class="text-dark">$20,744,00</strong>
-                                    </td>
-                                </tr>
+                                    <td class="right">{{ $row->subtotal_price }}{{ $setting->currency }}</td>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>

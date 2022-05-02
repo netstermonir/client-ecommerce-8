@@ -17,10 +17,10 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($order, $details)
     {
         $this->order = $order;
-        // $this->details = $details;
+        $this->details = $details;
     }
 
     /**
