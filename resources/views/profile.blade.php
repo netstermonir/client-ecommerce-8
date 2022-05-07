@@ -72,7 +72,7 @@
                           @foreach($orders as $row)
                            <tr>
                              <th scope="row">{{ $row->order_id }}</th>
-                             <td>{{ date('d F,Y'), strtotime($row->date) }}</td>
+                             <td>{{ $row->date }}</td>
                              <td>{{ $row->total }}{{ $setting->currency }}</td>
                              <td>{{ $row->payment_type }}</td>
                              <td>

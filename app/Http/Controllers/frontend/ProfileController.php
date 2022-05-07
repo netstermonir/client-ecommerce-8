@@ -9,6 +9,7 @@ use Hash;
 use App\Models\User;
 use DB;
 use Carbon\Carbon;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -106,5 +107,53 @@ class ProfileController extends Controller
             ->orderBy("id", "DESC")
             ->get();
         return view("user.myOrder", compact("orders"));
+    }
+
+    //support tircket show method
+    public function tricket()
+    {
+        $tricket = DB::table('trickets')->where('user_id', Auth::id())->latest()->take(10)->get();
+        return view('user.tricket', compact('tricket'));
+    }
+
+    // all tricket show 
+    public function Writetricket()
+    {
+        return view('user.writetricket');
+    }
+
+    //tricket store method
+    public function submitTricket(Request $request)
+    {
+        $validated = $request->validate([
+            "subject" => "required",
+            "message" => "required",
+        ]);
+        $data = [];
+        $data ['user_id'] = Auth::id();
+        $data ['subject'] = $request->subject;
+        $data ['service'] = $request->service;
+        $data ['priority'] = $request->priority;
+        $data ['message'] = $request->message;
+        $photo = $request->image;
+        if ($photo) {
+            //work with photo
+            $photoname = uniqid().'.'.$photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600,450)->save('public/files/tricket/' .$photoname);
+            $data ['image'] = 'public/files/tricket/' .$photoname;
+        }
+        $data ['status'] = 0;
+        $data ['date'] = date('Y-m-d');
+        $data ['created_at'] = Carbon::now();
+        $data ['updated_at'] = Carbon::now();
+        DB::table('trickets')->insert($data);
+        return response()->json(["success" => 'Tricket Submit Successfully !']);
+    }
+
+    //tricket details view method
+    public function Showtricket($id)
+    {
+        $tricket = DB::table('trickets')->where('id', $id)->first();
+        return view('user.show', compact('tricket'));
     }
 }

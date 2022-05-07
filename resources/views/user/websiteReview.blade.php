@@ -27,7 +27,7 @@
                    	    </div>
                    	    <div>
                    	    	<label for="exampleInputPassword1">Rating</label>
-                   	    	<select class="form-control" name="rating" style="min-width: 100%;">
+                   	    	<select class="form-control" name="rating" style="min-width: 100%; margin-left: 0;">
                    	    		<option value="1">1 star</option>
                    	    		<option value="2">2 star</option>
                    	    		<option value="3">3 star</option>

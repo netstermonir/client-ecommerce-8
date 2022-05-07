@@ -132,5 +132,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
             Route::get("/edit/{id}", "PageController@edit")->name("page.edit");
             Route::post("/update/{id}", "PageController@pageUpdate")->name("page.update");
         });
+        //tricket
+        Route::group(['prefix' => 'tricket'], function() {
+            Route::get("/", "TricketController@index")->name("tricket.index");
+            // Route::get("/create", "PageController@create")->name("page.create");
+            // Route::post("/store", "PageController@store")->name("page.store");
+            // Route::get("/delete/{id}", "PageController@destroy")->name("page.delete");
+            // Route::get("/edit/{id}", "PageController@edit")->name("page.edit");
+            // Route::post("/update/{id}", "PageController@pageUpdate")->name("page.update");
+        });
     });
 });

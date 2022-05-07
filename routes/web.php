@@ -133,4 +133,9 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
         "order.place"
     );
     Route::get("invoice", "CheckoutController@index")->name("invoice");
+    //support tricket
+    Route::get("open/tricket", "ProfileController@tricket")->name("open.tricket");
+    Route::get("write/tricket", "ProfileController@Writetricket")->name("write.tricket");
+    Route::post("submit/tricket", "ProfileController@submitTricket")->name("tricket.store");
+    Route::get("show/tricket/{id}", "ProfileController@Showtricket")->name("show.tricket");
 });

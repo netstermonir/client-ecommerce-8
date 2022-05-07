@@ -11,7 +11,7 @@
             <a href="{{ route('myorder') }}" class="text-muted"> <li class="list-group-item {{ Route::is('myorder') ? 'activesidebar' : '' }}"> <i class="fas fa-file-alt"></i>  My Order</li></a>
 
             <a href="{{ route('customar.setting') }}" class="text-muted"> <li class="list-group-item {{ Route::is('customar.setting') ? 'activesidebar' : '' }}"><i class="fas fa-edit"></i> Setting</li> </a>
-            <a href="" class="text-muted"> <li class="list-group-item"> <i class="fab fa-telegram-plane"></i> Open Ticket</li> </a>
+            <a href="{{ route('open.tricket') }}" class="text-muted"> <li class="list-group-item {{ Route::is('open.tricket') ? 'activesidebar' : '' }}"> <i class="fab fa-telegram-plane"></i> Open Ticket</li> </a>
             <a href="{{ route('customar.logout') }}" class="text-muted"> <li class="list-group-item"> <i class="fas fa-sign-out-alt"></i> Logout</li> </a>
            </ul>
 

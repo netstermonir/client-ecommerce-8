@@ -109,7 +109,7 @@ class CheckoutController extends Controller
         $order["shipping_charge"] = 0;
         $order["order_id"] = rand(1000, 9000000);
         $order["status"] = 0;
-        $order["date"] = date("d-m-Y");
+        $order["date"] = date("d F,Y");
         $order["month"] = date("F");
         $order["year"] = date("Y");
         $order["created_at"] = Carbon::now();

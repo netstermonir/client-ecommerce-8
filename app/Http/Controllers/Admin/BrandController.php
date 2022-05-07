@@ -54,8 +54,6 @@ class BrandController extends Controller
          //work with photo
          $photo = $request->brand_logo;
          $photoname = $slug.'.'.$photo->getClientOriginalExtension();
-         print_r($photoname);
-         return;
          // $photo->move('public/files/brand', $photoname); //without image intervention
          Image::make($photo)->resize(240,120)->save('public/files/brand/' .$photoname);
          $data ['brand_logo'] = 'public/files/brand/' .$photoname;
