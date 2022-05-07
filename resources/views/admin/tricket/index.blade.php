@@ -128,47 +128,47 @@
   });
 
   //delete product
-  // $(document).ready(function(){
-  // $(document).on('click', '#product_delete',function(e){
-  //   e.preventDefault();
-  //   var url = $(this).attr('href');
-  //   $("#deleted_form").attr('action',url);
-  //   Swal.fire({
-  //       title: 'Are you Want to Delete?',
-  //       text: "You Sure Now!",
-  //       icon: 'warning',
-  //       showCancelButton: true,
-  //       confirmButtonColor: '#3085d6',
-  //       cancelButtonColor: '#d33',
-  //       confirmButtonText: 'Yes, Delete!'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       $("#deleted_form").submit();
-  //     }
-  //     else{
-  //       swal.fire("Safe Data!");
-  //     }
-  //   })
-  // });
+  $(document).ready(function(){
+  $(document).on('click', '#tricket_delete',function(e){
+    e.preventDefault();
+    var url = $(this).attr('href');
+    $("#deleted_form").attr('action',url);
+    Swal.fire({
+        title: 'Are you Want to Delete?',
+        text: "You Sure Now!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $("#deleted_form").submit();
+      }
+      else{
+        swal.fire("Safe Data!");
+      }
+    })
+  });
 
     //data passed through here
-  //   $('#deleted_form').submit(function(e){
-  //     e.preventDefault();
-  //     var form_data = this;
-  //     $.ajax({
-  //       url:$(form_data).attr('action'),
-  //       method:$(form_data).attr('method'),
-  //       data:new FormData(form_data),
-  //       async:false,
-  //       processData:false,
-  //       contentType:false,
-  //       success:function(data){
-  //         toastr.success(data);
-  //         $('#deleted_form')[0].reset();
-  //          table.ajax.reload();
-  //       }
-  //     });
-  //   });
-  // });
+    $('#deleted_form').submit(function(e){
+      e.preventDefault();
+      var form_data = this;
+      $.ajax({
+        url:$(form_data).attr('action'),
+        method:$(form_data).attr('method'),
+        data:new FormData(form_data),
+        async:false,
+        processData:false,
+        contentType:false,
+        success:function(data){
+          toastr.success(data);
+          $('#deleted_form')[0].reset();
+           table.ajax.reload();
+        }
+      });
+    });
+  });
 </script>
 @endsection

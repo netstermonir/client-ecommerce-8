@@ -66,6 +66,7 @@
                              <th scope="col">Total</th>
                              <th scope="col">Payment Type</th>
                              <th scope="col">Status</th>
+                             <th scope="col">Action</th>
                            </tr>
                          </thead>
                          <tbody>
@@ -89,6 +90,9 @@
                               @elseif($row->status==5)
                                  <span class="badge badge-danger">Order Cancel</span>
                               @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('view.order', $row->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                             </td>
                            </tr>
                           @endforeach

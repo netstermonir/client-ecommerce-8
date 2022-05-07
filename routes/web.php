@@ -104,6 +104,9 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::get("customer/setting", "ProfileController@CustomerSetting")->name(
         "customar.setting"
     );
+    Route::get("view/order/{id}", "ProfileController@ViewOrder")->name(
+        "view.order"
+    );
     Route::post(
         "customer/password/change",
         "ProfileController@passwordChange"
@@ -138,4 +141,5 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::get("write/tricket", "ProfileController@Writetricket")->name("write.tricket");
     Route::post("submit/tricket", "ProfileController@submitTricket")->name("tricket.store");
     Route::get("show/tricket/{id}", "ProfileController@Showtricket")->name("show.tricket");
+    Route::post("reply/tricket/", "ProfileController@Replytricket")->name("reply.ticket");
 });

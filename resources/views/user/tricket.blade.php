@@ -41,8 +41,7 @@
                               @endif
                             </td>
                             <td>
-                            	<a href="{{ route('show.tricket', $row->id) }}"><i class="fa fa-eye"></i></a>
-                            	<a href=""><i class="fa fa-trash text-danger"></i></a>
+                            	<a href="{{ route('show.tricket', $row->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                             </td>
                            </tr>
                           @endforeach

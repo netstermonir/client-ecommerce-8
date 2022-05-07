@@ -112,7 +112,7 @@ class ProfileController extends Controller
     //support tircket show method
     public function tricket()
     {
-        $tricket = DB::table('trickets')->where('user_id', Auth::id())->latest()->take(10)->get();
+        $tricket = DB::table('trickets')->where('user_id', Auth::id())->orderBy('id', 'DESC')->take(10)->get();
         return view('user.tricket', compact('tricket'));
     }
 
@@ -155,5 +155,38 @@ class ProfileController extends Controller
     {
         $tricket = DB::table('trickets')->where('id', $id)->first();
         return view('user.show', compact('tricket'));
+    }
+
+    //user tricket reply
+    public function Replytricket(Request $request)
+    {
+        $validated = $request->validate([
+            "message" => "required",
+        ]);
+        $data = [];
+        $data ['tricket_id'] = $request->tricket_id;
+        $data ['user_id'] = Auth::id();
+        $data ['replied_message'] = $request->message;
+        $data ['replied_date'] = date('m-d-Y');
+        $data["created_at"] = Carbon::now();
+        $data["updated_at"] = Carbon::now();
+        $photo = $request->image;
+        if ($photo) {
+            //work with photo
+            $photoname = uniqid().'.'.$photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600,450)->save('public/files/reply-tricket/' .$photoname);
+            $data ['replied_image'] = 'public/files/reply-tricket/' .$photoname;
+        }
+        DB::table('trickets')->where('id', $request->tricket_id)->update(['status'=>0]);
+        DB::table('replied')->insert($data);
+        return response()->json(["success" => 'Tricket Reply Successfully !']);
+    }
+
+    //order details 
+    public function ViewOrder($id)
+    {
+        $order = DB::table('orders')->where('id', $id)->first();
+        $order_details = DB::table('order_details')->where('order_id', $id)->get();
+        return view('user.view', compact('order_details', 'order'));
     }
 }

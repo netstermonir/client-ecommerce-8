@@ -135,11 +135,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         //tricket
         Route::group(['prefix' => 'tricket'], function() {
             Route::get("/", "TricketController@index")->name("tricket.index");
-            // Route::get("/create", "PageController@create")->name("page.create");
-            // Route::post("/store", "PageController@store")->name("page.store");
-            // Route::get("/delete/{id}", "PageController@destroy")->name("page.delete");
-            // Route::get("/edit/{id}", "PageController@edit")->name("page.edit");
-            // Route::post("/update/{id}", "PageController@pageUpdate")->name("page.update");
+            Route::get("tricket/view/{id}", "TricketController@View")->name("tricket.view");
+            Route::post("tricket/reply", "TricketController@TricketReply")->name("admin.store.reply");
+            Route::get("close/tricket/{id}", "TricketController@closeTricket")->name("admin.close.tricket");
+            Route::delete("tricket/delete/{id}", "TricketController@destroy")->name("tricket.delete");
         });
     });
 });

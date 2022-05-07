@@ -15,6 +15,7 @@ class CreateRepliedTable extends Migration
     {
         Schema::create('replied', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->nullable();
             $table->unsignedBigInteger('tricket_id');
             $table->text('replied_message')->nullable();
             $table->string('replied_image')->nullable();
