@@ -138,8 +138,8 @@
                 if(data.error){
                     toastr.error(data.error);
                 }
-                else{
-                    toastr.error(data.errormessage);
+                if (data.errormessage) {
+                	toastr.error(data.errormessage);
                 }
                 $('#apply_coupon')[0].reset();
             }
