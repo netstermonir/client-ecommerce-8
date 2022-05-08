@@ -51,8 +51,6 @@
                                         <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
                                         <ul style="width: 300px; padding: 10px; left: -100px;">
                                             <li><a href="{{ route('profile') }}">Profile</a></li>
-                                            <li><a href="#">Setting</a></li>
-                                            <li><a href="#">Order List</a></li>
                                             <li><a href="{{ route('customar.logout') }}">Logout</a></li>
                                         </ul>
                                     </li>

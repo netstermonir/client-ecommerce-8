@@ -142,4 +142,7 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::post("submit/tricket", "ProfileController@submitTricket")->name("tricket.store");
     Route::get("show/tricket/{id}", "ProfileController@Showtricket")->name("show.tricket");
     Route::post("reply/tricket/", "ProfileController@Replytricket")->name("reply.ticket");
+    //order tracking route
+    Route::get("order/tracking", "IndexController@OrderTracking")->name("order.tracking");
+    Route::post("order/track", "IndexController@OrderTrack")->name("track.order");
 });

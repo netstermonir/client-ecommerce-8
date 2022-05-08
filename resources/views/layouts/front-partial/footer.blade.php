@@ -61,9 +61,9 @@
                     <div class="footer_column">
                         <div class="footer_title">Customer Care</div>
                         <ul class="footer_list">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Order Tracking</a></li>
-                            <li><a href="#">Wish List</a></li>
+                            <li><a href="{{ route('profile') }}">My Account</a></li>
+                            <li><a href="{{ route('order.tracking') }}">Order Tracking</a></li>
+                            <li><a href="{{ route('wishlist.page') }}">Wish List</a></li>
                             <li><a href="#">Contact Us</a></li>
                             <li><a href="#">Become a Vendor</a></li>
                         </ul>

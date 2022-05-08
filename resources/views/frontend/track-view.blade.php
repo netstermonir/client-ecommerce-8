@@ -3,11 +3,8 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            @include('user.sidebar')
-        </div>
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-10">
+            <div class="card mx-auto">
                 <div class="card-header">
                     {{ __('Order Details') }}
                 </div>

@@ -218,4 +218,28 @@ class IndexController extends Controller
             return response()->json(["error" => "Already Subscribed !"]);
         }
     }
+
+    //order tracking method
+    public function OrderTracking()
+    {
+        return view('frontend.order_track');
+    }
+
+    //track order
+    public function OrderTrack(Request $request)
+    {
+        $validated = $request->validate([
+        'order_id' => 'required',
+        ]);
+        $check = DB::table('orders')->where('order_id', $request->order_id)->first();
+        if ($check) {
+            $order = DB::table('orders')->where('order_id', $request->order_id)->first();
+            $order_details = DB::table('order_details')->where('order_id', $order->id)->get();
+            return view('frontend.track-view', compact('order_details', 'order'));
+        }
+        else{
+            $notify = ["messege" => "Invalide Order Id ! Try Again.","alert-type" => "error",];
+            return redirect()->back()->with($notify);
+        }
+    }
 }
