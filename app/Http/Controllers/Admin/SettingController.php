@@ -114,4 +114,27 @@ class SettingController extends Controller
         $notify = array('messege' => 'website Setting Update Sucessfull !', 'alert-type' => 'success');
         return redirect()->back()->with($notify);
     }
+
+    //payment getway setting
+    public function Paymentgetway()
+    {
+        $aamarpay = DB::table('payment_getway_bd')->first();
+        $surjopay = DB::table('payment_getway_bd')->skip(1)->first();
+        $sslpay = DB::table('payment_getway_bd')->skip(2)->first();
+        return view('admin.payment-bd.edit', compact('aamarpay', 'surjopay', 'sslpay'));
+    }
+
+    //update aamarpay
+    public function AamarpayUpdate(Request $request, $id)
+    {
+        $data = [];
+        $data ['store_id'] = $request->store_id;
+        $data ['signature_key'] = $request->signature_key;
+        $data ['status'] = $request->status;
+        $data ['created_at'] = Carbon::now();
+        $data ['updated_at'] = Carbon::now();
+        DB::table('payment_getway_bd')->where('id', $id)->update($data);
+        $notify = array('messege' => 'AamarPay Setting Update Sucessfull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notify);
+    }
 }

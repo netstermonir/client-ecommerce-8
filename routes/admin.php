@@ -123,6 +123,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
             Route::get("/", "SettingController@website")->name("website.setting");
             Route::post("/update/{id}", "SettingController@websiteUpdate")->name("website.setting.update");
         });
+        // smtp setting
+        Route::group(['prefix' => 'payment-getway'], function() {
+            Route::get("/", "SettingController@Paymentgetway")->name("payment.getway");
+            Route::post("aamarpay/update/{id}", "SettingController@AamarpayUpdate")->name("aamarpay.update");
+        });
         //page setting
         Route::group(['prefix' => 'page'], function() {
             Route::get("/", "PageController@index")->name("page.index");
@@ -132,7 +137,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
             Route::get("/edit/{id}", "PageController@edit")->name("page.edit");
             Route::post("/update/{id}", "PageController@pageUpdate")->name("page.update");
         });
-        //tricket
+        //tricket Route
         Route::group(['prefix' => 'tricket'], function() {
             Route::get("/", "TricketController@index")->name("tricket.index");
             Route::get("tricket/view/{id}", "TricketController@View")->name("tricket.view");

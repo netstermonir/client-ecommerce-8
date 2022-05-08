@@ -182,7 +182,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('page.index') }}" class="nav-link {{ Route::is('page.index') ? 'active' : '' }}">
+                <a href="{{ route('payment.getway') }}" class="nav-link {{ Route::is('payment.getway') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Payment Setting</p>
                 </a>

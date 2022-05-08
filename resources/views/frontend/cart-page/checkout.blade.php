@@ -53,7 +53,7 @@
 								<br>
 							  	   <div class="form-group col-lg-4">
 							  	 	<label>Paypal</label>
-							  	 	<input type="radio"  name="payment_type" value="Paypal">
+							  	 	<input type="radio"  name="payment_type" value="Paypal" disabled>
 							  	   </div>
 							  	   <div class="form-group col-lg-4">
 							  	 	<label>Bkash/Rocket/Nagad </label>

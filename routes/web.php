@@ -135,7 +135,6 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::post("order/place", "CheckoutController@orderPlcae")->name(
         "order.place"
     );
-    Route::get("invoice", "CheckoutController@index")->name("invoice");
     //support tricket
     Route::get("open/tricket", "ProfileController@tricket")->name("open.tricket");
     Route::get("write/tricket", "ProfileController@Writetricket")->name("write.tricket");
@@ -145,4 +144,10 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     //order tracking route
     Route::get("order/tracking", "IndexController@OrderTracking")->name("order.tracking");
     Route::post("order/track", "IndexController@OrderTrack")->name("track.order");
+    //aamarpay getway routes
+    Route::post('/success','CheckoutController@success')->name('success');
+    Route::post('/fail','CheckoutController@fail')->name('fail');
+    Route::post('order/cancel/', function(){
+        return redirect()->to('/');
+    })->name('cancel');
 });
