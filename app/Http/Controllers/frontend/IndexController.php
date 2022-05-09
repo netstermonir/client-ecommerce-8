@@ -55,6 +55,10 @@ class IndexController extends Controller
             ->orderBy("id", "DESC")
             ->limit(12)
             ->get();
+            $campaign = DB::table("campaigns")
+            ->where("status", 1)
+            ->orderBy("id", "DESC")->limit(6)
+            ->get();
         return view(
             "frontend.index",
             compact(
@@ -67,7 +71,8 @@ class IndexController extends Controller
                 "home_cat",
                 "random",
                 "today_deal",
-                "review"
+                "review",
+                "campaign"
             )
         );
     }

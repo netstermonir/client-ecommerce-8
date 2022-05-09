@@ -41,8 +41,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col d-flex flex-row">
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/phone.png" alt=""></div>01747706163</div>
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/mail.png" alt=""></div><a href=""><span class="__cf_email__" data-cfemail="">ecom@gmail.com</span></a></div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/phone.png" alt=""></div>{{ $setting->phone_two }}</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/mail.png" alt=""></div><a href=""><span class="__cf_email__" data-cfemail="">{{ $setting->main_mail }}</span></a></div>
                         <div class="top_bar_content ml-auto">
                             @if(Auth::check())
                             <div class="top_bar_menu">

@@ -90,9 +90,11 @@
 							<button class="btn btn-danger btn-lg">
 								<a href="{{ route('cart.empty') }}" class="text-white">Clear Cart</a>
 							</button>
-							<button type="button" class="button cart_button_checkout">
-								<a href="{{ route('checkout') }}">Checkout</a>
+							
+							<button  type="button" class="button cart_button_checkout">
+								<a  href="{{ route('checkout') }}">Checkout</a>
 							</button>
+							
 						</div>
 					</div>
 				</div>

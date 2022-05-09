@@ -31,8 +31,30 @@
             </div>
         </div>
     </div>
-    <!-- Brands -->
+    {{-- campaign --}}
+    <div class="brands" style="padding-bottom:0">
+        <div class="container">
+            <h3 class="text-center">Campaign Offer Running<hr></h3>
+            <div class="row">
+                @forelse($campaign as $row)
+                <div class="col-md-4">
+                    <a href="">
+                        <div class="campaign_img">
+                            <img src="{{ asset($row->image) }}" width="100%" alt="{{ $row->name }}">
+                            <div class="campaign_title mt-2">
+                                <h4 class="text-center">{{ $row->name }}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @empty
+                    <p class="mx-auto">No Campaign Running At This Time</p>
+                @endforelse
+            </div>
+        </div>
+    </div>
 
+    <!-- Brands -->
     <div class="brands">
         <div class="container">
             <div class="row">

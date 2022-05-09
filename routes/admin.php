@@ -79,6 +79,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::get("/status/{id}", "ProductController@status");
     });
 
+    //order Route
+    Route::group(['prefix' => 'order'], function() {
+        Route::get("all/orders", "OrderController@AllOrders")->name("admin.orders.index");
+        Route::get("/view/{id}", "OrderController@viewOrder");
+        Route::delete('/delete/{id}','OrderController@destroy')->name('order.delete');
+        Route::get("/edit/{id}", "OrderController@edit");
+        Route::post("order/update", "OrderController@update")->name("order.status.update");
+        Route::post("order/status/update", "OrderController@orderupdate")->name("order.details.status.update");
+    });
+
     //cupon Route
     Route::group(['prefix' => 'cupon'], function() {
         Route::get("/", "CuponController@index")->name("cupon.index");

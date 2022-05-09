@@ -38,7 +38,7 @@
 			                              @elseif($order->status==2)
 			                                 <span class="badge badge-primary">Order Shipped</span>
 			                              @elseif($order->status==3)
-			                                 <span class="badge badge-success">Order Done</span>
+			                                 <span class="badge badge-success">Order Completed</span>
 			                              @elseif($order->status==4)
 			                                 <span class="badge badge-warning">Order Return</span>
 			                              @elseif($order->status==5)

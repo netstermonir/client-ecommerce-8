@@ -99,6 +99,24 @@
               </li>
             </ul>
           </li>
+          {{-- orders menu --}}
+          <li class="nav-item {{ Route::is('admin.orders.index') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-product-hunt"></i>
+              <p>
+                Orders Options
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.orders.index') }}" class="nav-link {{ Route::is('admin.orders.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Orders</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           {{-- offer menu --}}
           <li class="nav-item {{ Route::is('cupon.index') || Route::is('campaign.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
@@ -160,7 +178,7 @@
             </ul>
           </li>
           {{-- Setting menu --}}
-          <li class="nav-item {{ Route::is('seo.setting') || Route::is('smtp.setting') || Route::is('page.index') || Route::is('page.index') || Route::is('website.setting') ? 'menu-is-opening menu-open' : '' }}">
+          <li class="nav-item {{ Route::is('seo.setting') || Route::is('smtp.setting') || Route::is('page.index') || Route::is('page.index') || Route::is('website.setting') || Route::is('payment.getway') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
