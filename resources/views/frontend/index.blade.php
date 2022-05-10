@@ -15,7 +15,11 @@
         <div class="banner_background" style="background-image:url({{ asset('public/frontend') }}/images/banner_background.jpg)"></div>
         <div class="container fill_height">
             <div class="row fill_height">
-                <div class="banner_product_image"><img src="{{ asset('public/files/product/'.$banner->thumbnail) }}" alt="{{ $banner->name }}"></div>
+                <div class="banner_product_image">
+                    @isset($banner->thumbnail)
+                    <img src="{{ asset('public/files/product/'.$banner->thumbnail) }}" alt="{{ $banner->name }}">
+                    @endisset
+                </div>
                 <div class="col-lg-5 offset-lg-4 fill_height">
                     <div class="banner_content">
                         <h1 class="banner_text">{{ $banner->name }}</h1>

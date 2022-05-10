@@ -150,4 +150,8 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::post('order/cancel/', function(){
         return redirect()->to('/');
     })->name('cancel');
+
 });
+    //social login
+    Route::get('oauth/{driver}', [App\Http\Controllers\Auth\LoginController::class,"redirectToProvider",])->name("social.oauth");
+    Route::get('oauth/{driver}/callback', [App\Http\Controllers\Auth\LoginController::class,"handleProviderCallback",])->name("social.callback");

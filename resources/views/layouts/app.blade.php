@@ -90,6 +90,13 @@
                                                     <button type="submit" style="cursor:pointer;" class="form-control btn btn-sm btn-info">Login</button>
                                                 </div>
                                             </form>
+                                            <div class="form-group">
+                                                <a href="{{ route('social.oauth', 'google') }}" class="text-white">
+                                                    <button type="submit" style="cursor:pointer;" class="form-control btn btn-sm btn-secondary">
+                                                        <img width="30" src="{{ asset('public/frontend') }}/images/google.png" alt="Login With Google"> Login With Google
+                                                    </button>
+                                                </a>
+                                            </div>
                                             </div>
                                         </ul>
                                     </li>
