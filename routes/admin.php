@@ -155,5 +155,27 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
             Route::get("close/tricket/{id}", "TricketController@closeTricket")->name("admin.close.tricket");
             Route::delete("tricket/delete/{id}", "TricketController@destroy")->name("tricket.delete");
         });
+        //blog category Route
+        Route::group(['prefix' => 'blog'], function() {
+            Route::get("/", "BlogController@index")->name("blog.category.index");
+            Route::post("/store", "BlogController@store")->name("blog.category.store");
+            Route::delete('/delete/{id}','BlogController@destroy')->name('blog.category.delete');
+            Route::get("/edit/{id}", "BlogController@edit");
+            Route::post("/update", "BlogController@update")->name("blog_category.update");
+        });
     });
+        //order report print 
+        Route::group(['prefix' => 'report'], function() {
+            Route::get("/", "OrderController@Reportindex")->name("order.report.index");
+            Route::get("/print", "OrderController@ReportPrint")->name("report.order.print");
+        });
+        //user role
+        Route::group(['prefix' => 'role'], function() {
+            Route::get("/user", "RoleController@roleCreate")->name("userRole.create");
+            Route::post("/store", "RoleController@rolestore")->name("userRole.store");
+            Route::get("/all/role", "RoleController@Allrole")->name("manage.role");
+            Route::get("/role/delete/{id}", "RoleController@destroy")->name("role.delete");
+            Route::get("/role/edit/{id}", "RoleController@edit")->name("role.edit");
+            Route::post("/role/update", "RoleController@update")->name("role.update");
+        });
 });

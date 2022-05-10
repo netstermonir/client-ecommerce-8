@@ -140,4 +140,100 @@ class OrderController extends Controller
         $order_details = DB::table('order_details')->where('order_id', $id)->delete();
         return response()->json('Order Delete Sucessfull !');
     }
+    //report order index
+    public function Reportindex(Request $request)
+    {
+        // yajra DataTables
+        if ($request->ajax()) {
+            $product = "";
+            $query = DB::table('orders')->orderBy('id', 'DESC');
+                if ($request->payment_type) {
+                    $query->where('payment_type', $request->payment_type);
+                }
+                if ($request->date) {
+                    $order_date = date('d-m-Y', strtotime($request->date));
+                    $query->where('date', $order_date);
+                }
+                if ($request->status==0) {
+                    $query->where('status',0);
+                }
+                if ($request->status==1) {
+                    $query->where('status',1);
+                }
+                if ($request->status==2) {
+                    $query->where('status',2);
+                }
+                if ($request->status==3) {
+                    $query->where('status',3);
+                }
+                if ($request->status==4) {
+                    $query->where('status',4);
+                }
+                if ($request->status==5) {
+                    $query->where('status',5);
+                }
+
+            $product = $query->get();
+            return DataTables::of($product)->addIndexColumn()
+            ->editColumn('status', function($row){
+                if ($row->status == 0) {
+                    return '<span class="badge badge-danger">Order Pending</span>';
+                }
+                elseif($row->status == 1) {
+                    return '<span class="badge badge-primary">Order Received</span>';
+                }
+                elseif($row->status == 2) {
+                    return '<span class="badge badge-warning">Order Shipped</span>';
+                }
+                elseif($row->status == 3) {
+                    return '<span class="badge badge-success">Order Completed</span>';
+                }
+                elseif($row->status == 4) {
+                    return '<span class="badge badge-warning">Order Return</span>';
+                }
+                elseif($row->status == 5) {
+                    return '<span class="badge badge-danger">Order Cencel</span>';
+                }
+            })
+            ->rawColumns(['status'])->make(true);
+        }
+        return view('admin.report.index');
+    }
+
+    //print report
+    public function ReportPrint(Request $request)
+    {
+        if ($request->ajax()) {
+            $order = "";
+            $query = DB::table('orders')->orderBy('id', 'DESC');
+                if ($request->payment_type) {
+                    $query->where('payment_type', $request->payment_type);
+                }
+                if ($request->date) {
+                    $order_date = date('d-m-Y', strtotime($request->date));
+                    $query->where('date', $order_date);
+                }
+                if ($request->status==0) {
+                    $query->where('status',0);
+                }
+                if ($request->status==1) {
+                    $query->where('status',1);
+                }
+                if ($request->status==2) {
+                    $query->where('status',2);
+                }
+                if ($request->status==3) {
+                    $query->where('status',3);
+                }
+                if ($request->status==4) {
+                    $query->where('status',4);
+                }
+                if ($request->status==5) {
+                    $query->where('status',5);
+                }
+
+            $order = $query->get();
+        }
+        return view('admin.report.print', compact('order'));
+    }
 }

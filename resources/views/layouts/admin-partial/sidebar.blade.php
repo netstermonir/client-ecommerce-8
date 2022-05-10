@@ -102,7 +102,7 @@
           {{-- orders menu --}}
           <li class="nav-item {{ Route::is('admin.orders.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fab fa-product-hunt"></i>
+              <i class="nav-icon fas fa-shopping-bag"></i>
               <p>
                 Orders Options
                 <i class="fas fa-angle-left right"></i>
@@ -215,6 +215,114 @@
                 <a href="{{ route('website.setting') }}" class="nav-link {{ Route::is('website.setting') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Website Setting</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- blog menu --}}
+          <li class="nav-item {{ Route::is('blog.category.index') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-blog"></i>
+              <p>
+                Blogs Option
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('blog.category.index') }}" class="nav-link {{ Route::is('blog.category.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Blog Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{-- {{ route('blog.post.index') }} --}}" class="nav-link {{-- {{ Route::is('blog.post.index') ? 'active' : '' }} --}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Blog Post</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- contact menu --}}
+          <li class="nav-item {{-- {{ Route::is('blog.category.index') ? 'menu-is-opening menu-open' : '' }} --}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Contact Option
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link {{-- {{ Route::is('blog.category.index') ? 'active' : '' }} --}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Contact Us</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- reports menu --}}
+          <li class="nav-item {{ Route::is('order.report.index') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-flag"></i>
+              <p>
+                Reports Option
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('order.report.index') }}" class="nav-link {{ Route::is('order.report.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Order Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{-- {{ route('blog.post.index') }} --}}" class="nav-link {{-- {{ Route::is('blog.post.index') ? 'active' : '' }} --}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Customer Report</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{-- {{ route('blog.post.index') }} --}}" class="nav-link {{-- {{ Route::is('blog.post.index') ? 'active' : '' }} --}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock Report</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{-- {{ route('blog.post.index') }} --}}" class="nav-link {{-- {{ Route::is('blog.post.index') ? 'active' : '' }} --}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product Report</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{-- {{ route('blog.post.index') }} --}}" class="nav-link {{-- {{ Route::is('blog.post.index') ? 'active' : '' }} --}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tricket Report</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- user role menu --}}
+          <li class="nav-item {{ Route::is('userRole.create') || Route::is('manage.role') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                User Role
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('userRole.create') }}" class="nav-link {{ Route::is('userRole.create') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create New User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('manage.role') }}" class="nav-link {{ Route::is('manage.role') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User Manage</p>
                 </a>
               </li>
             </ul>

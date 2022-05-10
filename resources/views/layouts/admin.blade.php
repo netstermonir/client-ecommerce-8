@@ -132,6 +132,7 @@
 <!-- Select2 -->
 <script src="{{ asset('public/backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js" integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('public/backend/plugins/printThis/printThis.js') }}"></script>
 
 <script type="text/javascript">
   $("#meta_tag").selectize({

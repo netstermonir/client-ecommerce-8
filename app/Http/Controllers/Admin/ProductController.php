@@ -227,10 +227,12 @@ class ProductController extends Controller
             }
             // multiple image delete
             $images = json_decode($data->images, true);
-            foreach($images as $image){
-               $image_path = "public/files/product/".$image;
-               if (File::exists($image_path)) {
-                    unlink($image_path);
+            if (isset($images)) {
+                foreach($images as $image){
+                   $image_path = "public/files/product/".$image;
+                   if (File::exists($image_path)) {
+                        unlink($image_path);
+                    }
                 }
             }
         }

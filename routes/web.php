@@ -150,6 +150,12 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     Route::post('order/cancel/', function(){
         return redirect()->to('/');
     })->name('cancel');
+    //contact us route
+    Route::get("contact-us", "IndexController@Contact")->name("contact");
+    Route::post("contact/store", "IndexController@Contactstore")->name("contact.store");
+
+    //blog route
+    Route::get("blog", "IndexController@Blog")->name("blog");
 
 });
     //social login

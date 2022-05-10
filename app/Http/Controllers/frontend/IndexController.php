@@ -247,4 +247,37 @@ class IndexController extends Controller
             return redirect()->back()->with($notify);
         }
     }
+
+    //contact us page load
+    public function Contact()
+    {
+        return view('frontend.contact');
+    }
+
+    //contact data store
+    public function Contactstore(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
+        $data = [];
+        $data ['name'] = $request->name;
+        $data ['email'] = $request->email;
+        $data ['phone'] = $request->phone;
+        $data ['message'] = $request->message;
+        $data ['date'] = date('d-m-Y');
+        $data["created_at"] = Carbon::now();
+        $data["updated_at"] = Carbon::now();
+        DB::table('contacts')->insert($data);
+        return response()->json(['success'=> 'Thanks For Your Contact !']);
+    }
+
+    //blog page load
+    public function blog()
+    {
+        return view('frontend.blog');
+    }
 }

@@ -148,7 +148,7 @@ class CheckoutController extends Controller
             $aamarpay = DB::table('payment_getway_bd')->first();
             if ($aamarpay->store_id == NULL) {
                 $notify = ["messege" => "Please Setup Payment Getway !","alert-type" => "error",];
-                return redirect()->to("profile")->with($notify);
+                return redirect()->back()->with($notify);
             }else{
                 if ($aamarpay->status == 1) {
                     $url = 'https://secure.aamarpay.com/request.php';

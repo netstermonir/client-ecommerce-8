@@ -215,6 +215,7 @@
 <script src="{{ asset('public/frontend') }}/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="{{ asset('public/frontend') }}/js/shop_custom.js"></script>
 <script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/backend/plugins/printThis/printThis.js') }}"></script>
 
 <script type="text/javascript">
     function Cart() {

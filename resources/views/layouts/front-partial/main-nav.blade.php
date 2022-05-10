@@ -49,13 +49,14 @@
                             <div class="main_nav_menu ml-auto">
                                 <ul class="standard_dropdown main_nav_dropdown">
                                     <li><a href="{{ url('/') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="">Campaign<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{ route('blog') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{ route('contact') }}">Contact<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </div>
 
                             <!-- Menu Trigger -->
-
+                            {{-- mobile --}}
                             <div class="menu_trigger_container ml-auto">
                                 <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
                                     <div class="menu_burger">
