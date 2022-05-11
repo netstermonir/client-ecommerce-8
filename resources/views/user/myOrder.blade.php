@@ -42,7 +42,7 @@
                               @elseif($row->status==2)
                                  <span class="badge badge-primary">Order Shipped</span>
                               @elseif($row->status==3)
-                                 <span class="badge badge-success">Order Done</span>
+                                 <span class="badge badge-success">Order Completed</span>
                               @elseif($row->status==4)
                                  <span class="badge badge-warning">Order Return</span>
                               @elseif($row->status==5)

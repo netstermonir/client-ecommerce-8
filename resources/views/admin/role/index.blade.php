@@ -41,7 +41,7 @@
                     <th>Sl</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th>Access</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -73,8 +73,12 @@
                          @endif
                       </td>
                       <td>
-                        <a href="{{ route('role.edit', $row->id) }}" class="btn btn-info btn-sm" ><i class="fas fa-edit"></i></a>
-                        <a href="{{ route('role.delete', $row->id) }}" id="category-delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                        @if($row->role_admin == Null)
+                          <button disabled class="btn btn-danger btn-sm">Disabled</button>
+                          @else
+                            <a href="{{ route('role.edit', $row->id) }}" class="btn btn-info btn-sm" ><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('role.delete', $row->id) }}" id="category-delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                        @endif
                       </td>
                   </tr>
                   @endforeach

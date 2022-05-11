@@ -13,7 +13,7 @@ class RoleController extends Controller
     //show all role 
     public function Allrole()
     {
-        $data = DB::table('users')->where('role_admin', 1)->get();
+        $data = DB::table('users')->where('role_admin', 1)->orwhere('role_admin', NULL)->get();
         return view('admin.role.index', compact('data'));
     }
 
