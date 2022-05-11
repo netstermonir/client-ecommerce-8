@@ -18,16 +18,6 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -50,7 +40,17 @@
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="email">Employe Email <span class="text-danger">*</span> </label>
-                      <input type="email" class="form-control"  name="email" id="email" required="">
+                      <input type="email" class="form-control @error('email') is-invalid @enderror"  name="email" id="email" required="">
+                      @if (session('erorr'))
+                        <span style="color: red; margin-top:2px" role="alert">
+                                <strong>{{ session('erorr') }}</strong>
+                            </span>
+                      @endif
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="password">Password <span class="text-danger">*</span> </label>
@@ -126,26 +126,4 @@
     </section>
     <!-- /.content -->
   </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-     //userrole insert method
-    $('#user_role_form').submit(function(e){
-    e.preventDefault();
-    $('.loader').removeClass('d-none');
-    var url = $(this).attr('action');
-    var request =$(this).serialize();
-    $.ajax({
-      url:url,
-      type:'post',
-      async:false,
-      data:request,
-      success:function(data){
-        toastr.success(data);
-        $('#user_role_form')[0].reset();
-        $('.loader').addClass('d-none');
-      }
-    });
-  });
-</script>
 @endsection

@@ -34,6 +34,7 @@
             </a>
           </li>
           {{-- category menu --}}
+          @if(Auth::user()->category == 1)
           <li class="nav-item {{ Route::is('category.index') || Route::is('subcategory.index') || Route::is('childcategory.index') || Route::is('brand.index') || Route::is('warehouse.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -75,7 +76,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- product menu --}}
+          @if(Auth::user()->product == 1)
           <li class="nav-item {{ Route::is('product.create') || Route::is ('product.index') || Route::is ('product.edit') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fab fa-product-hunt"></i>
@@ -99,7 +102,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- orders menu --}}
+          @if(Auth::user()->order == 1)
           <li class="nav-item {{ Route::is('admin.orders.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
@@ -117,7 +122,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- offer menu --}}
+          @if(Auth::user()->offer == 1)
           <li class="nav-item {{ Route::is('cupon.index') || Route::is('campaign.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-angry"></i>
@@ -141,7 +148,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- pickup point menu --}}
+          @if(Auth::user()->pickup == 1)
           <li class="nav-item {{ Route::is('pickuppoint.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-truck-pickup"></i>
@@ -159,7 +168,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- tricket menu --}}
+          @if(Auth::user()->tricket == 1)
           <li class="nav-item {{ Route::is('tricket.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-ticket-alt"></i>
@@ -177,7 +188,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- Setting menu --}}
+          @if(Auth::user()->setting == 1)
           <li class="nav-item {{ Route::is('seo.setting') || Route::is('smtp.setting') || Route::is('page.index') || Route::is('page.index') || Route::is('website.setting') || Route::is('payment.getway') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
@@ -219,7 +232,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- blog menu --}}
+          @if(Auth::user()->blog == 1)
           <li class="nav-item {{ Route::is('blog.category.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-blog"></i>
@@ -243,7 +258,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- contact menu --}}
+          @if(Auth::user()->contact == 1)
           <li class="nav-item {{-- {{ Route::is('blog.category.index') ? 'menu-is-opening menu-open' : '' }} --}}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
@@ -261,7 +278,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- reports menu --}}
+          @if(Auth::user()->report == 1)
           <li class="nav-item {{ Route::is('order.report.index') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-flag"></i>
@@ -303,7 +322,9 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- user role menu --}}
+          @if(Auth::user()->role == 1)
           <li class="nav-item {{ Route::is('userRole.create') || Route::is('manage.role') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -327,6 +348,7 @@
               </li>
             </ul>
           </li>
+          @endif
           {{-- admin password change --}}
           <li class="nav-header">Profile</li>
           <li class="nav-item">

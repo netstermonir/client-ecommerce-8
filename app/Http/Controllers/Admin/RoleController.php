@@ -13,7 +13,7 @@ class RoleController extends Controller
     //show all role 
     public function Allrole()
     {
-        $data = DB::table('users')->where('is_admin', 1)->where('role_admin', 1)->get();
+        $data = DB::table('users')->where('role_admin', 1)->get();
         return view('admin.role.index', compact('data'));
     }
 
@@ -30,7 +30,7 @@ class RoleController extends Controller
             'email' => 'required|unique:users',
         ]);
         $data = [];
-        $data ['is_admin'] = 1;
+        $data ['is_admin'] = 0;
         $data ['role_admin'] = 1;
         $data ['name'] = $request->name;
         $data ['email'] = $request->email;
@@ -50,7 +50,8 @@ class RoleController extends Controller
         $data ['created_at'] = Carbon::now();
         $data ['updated_at'] = Carbon::now();
         DB::table('users')->insert($data);
-        return response()->json('User Role Create Sucessfull !!');
+        $notify = array('messege' => 'User Role Create Sucessfull !!', 'alert-type' => 'success');
+        return redirect()->route('manage.role')->with($notify);
     }
 
     //role edit page load

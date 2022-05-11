@@ -18,9 +18,11 @@ class IsAdmin
     {
         if (auth()->user()->is_admin == 1) {
             return $next($request);
+        }elseif(auth()->user()->status == 1) {
+            return $next($request);
+        }else{
+            $notify = array('messege' => 'You are not a Admin !!', 'alert-type' => 'error');
+            return redirect()->back()->with($notify);
         }
-        return redirect()
-            ->route("home")
-            ->with("error", "You are not a Admin.");
     }
 }

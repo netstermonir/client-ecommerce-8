@@ -172,7 +172,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         //user role
         Route::group(['prefix' => 'role'], function() {
             Route::get("/user", "RoleController@roleCreate")->name("userRole.create");
-            Route::post("/store", "RoleController@rolestore")->name("userRole.store");
+            Route::post("/store", "RoleController@rolestore")->name("role.store");
             Route::get("/all/role", "RoleController@Allrole")->name("manage.role");
             Route::get("/role/delete/{id}", "RoleController@destroy")->name("role.delete");
             Route::get("/role/edit/{id}", "RoleController@edit")->name("role.edit");

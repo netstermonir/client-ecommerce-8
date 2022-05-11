@@ -53,15 +53,6 @@
                       <label for="email">Employe Email <span class="text-danger">*</span> </label>
                       <input type="email" class="form-control"  name="email" id="email" value="{{ $data->email }}" required="">
                     </div>
-                    {{-- <div class="form-group col-lg-4">
-				    	<label>Password <span class="text-danger">*</span></label>
-					    <div class="input-group" id="show_hide_password">
-					      <input class="form-control" type="password" name="password" value="{{ $data->password }}" required>
-						      <div class="input-group-addon" style="background-color: ;">
-						        <a href="" title="view password"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-						      </div>
-					    </div>
-				  	</div> --}}
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-3">

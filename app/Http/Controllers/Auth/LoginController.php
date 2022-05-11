@@ -59,10 +59,13 @@ class LoginController extends Controller
             ])
         ) {
             if (auth()->user()->is_admin == 1) {
-                return redirect()
-                    ->route("admin.home")
-                    ->with("success", "Admin Login Successfull");
-            } else {
+                $notify = array('messege' => 'Super Admin Login Successfull !!', 'alert-type' => 'success');
+                return redirect()->route("admin.home")->with($notify);
+            }elseif (auth()->user()->status == 1) {
+                $notify = array('messege' => 'Role Admin Login Successfull !!', 'alert-type' => 'success');
+                return redirect()->route("admin.home")->with($notify);
+            }
+             else {
                 return redirect()
                     ->back()
                     ->with("success", "Login SuccesFull !");
