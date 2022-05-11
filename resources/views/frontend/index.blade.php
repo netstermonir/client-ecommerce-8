@@ -36,28 +36,57 @@
         </div>
     </div>
     {{-- campaign --}}
+    @if($campaign)
     <div class="brands" style="padding-bottom:0">
         <div class="container">
             <h3 class="text-center">Campaign Offer Running<hr></h3>
             <div class="row">
-                @forelse($campaign as $row)
-                <div class="col-md-4">
-                    <a href="">
-                        <div class="campaign_img">
-                            <img src="{{ asset($row->image) }}" width="100%" alt="{{ $row->name }}">
-                            <div class="campaign_title mt-2">
-                                <h4 class="text-center">{{ $row->name }}</h4>
+                @php
+                    $today_date = strtotime(date('Y-m-d'));
+                    $campaign_start_date = strtotime($campaign->start_date);//1651881600
+                    $campaign_end_date = strtotime($campaign->end_date);//1652227200
+                @endphp
+                @if($today_date >= $campaign_start_date && $today_date <= $campaign_end_date)
+                    <div class="col-md-4 mx-auto">
+                        <a href="{{ route('frontend.campaign.product.list', $campaign->id) }}">
+                            <div class="campaign_img">
+                                <img width="100%" src="{{ asset($campaign->image) }}" width="100%" alt="{{ $campaign->name }}">
+                                <div class="campaign_title mt-2">
+                                    <h4 class="text-center">{{ $campaign->name }}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    @else
+                    <div class="col-md-4 mx-auto">
+                        <div>
+                            <div class="campaign_img">
+                                <img src="{{ asset($campaign->image) }}" width="100%" alt="{{ $campaign->name }}">
+                                <div class="campaign_title mt-2">
+                                    <h4 class="text-center text-muted">{{ $campaign->name }}</h4>
+                                </div>
+                                <div>
+                                    <p class="text-center text-white" style="margin-top: -100px; background: black; padding: 5px;">Campaign Date Expired</p>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-                @empty
-                    <p class="mx-auto">No Campaign Running At This Time</p>
-                @endforelse
+                    </div>
+                @endif
+                    
             </div>
         </div>
     </div>
-
+    @else
+    <div class="campaign mt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <p class="text-center" style="font-size:25px">No Campaign Running At This Time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     <!-- Brands -->
     <div class="brands">
         <div class="container">

@@ -57,8 +57,7 @@ class IndexController extends Controller
             ->get();
             $campaign = DB::table("campaigns")
             ->where("status", 1)
-            ->orderBy("id", "DESC")->limit(6)
-            ->get();
+            ->orderBy('id','DESC')->first();
         return view(
             "frontend.index",
             compact(
@@ -279,5 +278,26 @@ class IndexController extends Controller
     public function blog()
     {
         return view('frontend.blog');
+    }
+
+    //campaign produt
+    public function campaignProduct($id)
+    {
+        $product = DB::table('campaign_product')->leftJoin('products','campaign_product.product_id','products.id')->select('products.*','campaign_product.*')->where('campaign_product.campaign_id', $id)->paginate(32);
+        $campaign = DB::table('campaigns')->where('id', $id)->first();
+        return view('frontend.campaign.product_list', compact('product', 'campaign'));
+    }
+
+    //campaign product details
+    public function campaignProductdetails($slug)
+    {
+        $productdetails = Product::where("slug", $slug)->first();
+        Product::where("slug", $slug)->increment("product_views");
+        $product_price = DB::table('campaign_product')->where('product_id', $productdetails->id)->first();
+        // similar product
+        $related_product = DB::table('campaign_product')->leftJoin('products','campaign_product.product_id','products.id')->select('products.*','campaign_product.*')->inRandomOrder(12)->get();
+        //review
+        $review = Review::where("product_id", $productdetails->id)->orderBy("id", "DESC")->take(10)->get();
+        return view("frontend.campaign.campaign_product_details",compact("productdetails", "related_product", "review", "product_price"));
     }
 }

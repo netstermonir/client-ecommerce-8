@@ -12,7 +12,7 @@
 	$sum_rating = App\Models\Review::where('product_id', $productdetails->id)->sum('rating');
 	$count_rating=App\Models\Review::where('product_id',$productdetails->id)->count('rating');
 
-		// socaial share
+	// socaial share
 	// Share button 1
    $shareButtons1 = \Share::page(
          url()->current()
@@ -113,24 +113,12 @@
 								→<b>Unit: </b>{{ $productdetails->unit }}
 							@endif
 						</div>
-						@if($productdetails->discount_price == Null)
-                            <div class="product_price">{{ $setting->currency }}{{ $productdetails->selling_price }}</div>
-                            @else
-                                <div class="product_price">
-                                	<del class="text-danger" style="font-size:12px;">{{ $setting->currency }}{{ $productdetails->selling_price }}</del>
-                                	{{ $setting->currency }}{{ $productdetails->discount_price }}
-                                </div>
-                        @endif
-						{{-- <div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div> --}}
+                            <div class="product_price">{{ $setting->currency }}{{ $product_price->price }}</div>
 						<div class="order_info d-flex flex-row">
 							<form action="{{ route('add.to.cart.quickview') }}" method="post" id="add_cart_details_form">
 								@csrf
 								<input type="hidden" name="id" value="{{ $productdetails->id }}">
-								@if($productdetails->discount_price==NULL)
-			                      <input type="hidden" name="price" value="{{$productdetails->selling_price}}">
-			                      @else
-			                      <input type="hidden" name="price" value="{{$productdetails->discount_price}}">
-			                    @endif
+								<input type="hidden" name="price" value="{{$product_price->price}}">
 								<div class="row">
 									@isset($productdetails->color)
 								    <div class="form-group col-md-6">
@@ -446,12 +434,8 @@
 								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
 									<div class="viewed_image"><img src="{{ asset('public/files/product/'.$row->thumbnail) }}" alt="{{ $row->name }}"></div>
 									<div class="viewed_content text-center">
-										@if($row->discount_price==NULL)
-								             <div class="viewed_price">{{ $setting->currency }}{{ $row->selling_price }}</div>
-								            @else
-								             <div class="viewed_price">{{ $setting->currency }}{{ $row->discount_price }} <span>{{ $setting->currency }}{{ $row->selling_price }}</span></div>
-							            @endif
-										<div class="viewed_name"><a href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0,18) }}</a></div>
+										<div class="viewed_price">{{ $setting->currency }}{{ $row->price }}</div>
+										<div class="viewed_name"><a href="{{ route('campaign.products.details', $row->slug) }}">{{ substr($row->name, 0,18) }}</a></div>
 									</div>
 									<ul class="item_marks">
 										<li class="item_mark item_discount">new</li>

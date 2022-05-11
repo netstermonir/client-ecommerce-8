@@ -105,6 +105,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::delete('/delete/{id}','CampaignController@destroy')->name('campaign.delete');
         Route::get("/edit/{id}", "CampaignController@edit");
         Route::post("/update", "CampaignController@update")->name("campaign.update");
+        //campaign product
+        Route::get("/product/{campaign_id}", "CampaignController@campaignProduct")->name("campaign.product");
+        Route::get("/product/store/{id}/{campaign_id}", "CampaignController@campaignProductstore")->name("campaign.product.store");
+        Route::get("/product/list/{campaign_id}", "CampaignController@campaignProductList")->name("campaign.product.list");
+        Route::get("/product/delete/{id}", "CampaignController@campaignProductdelete")->name("campaign.product.delete");
     });
 
     //pickup point Route

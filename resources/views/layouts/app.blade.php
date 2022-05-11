@@ -25,6 +25,39 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/responsive.css">
     <link rel="stylesheet" href="{{asset('public/backend/plugins/toastr/toastr.min.css')}}">
+         <style>
+     #social-links ul{
+          padding-left: 0;
+     }
+     #social-links ul li {
+          display: inline-block;
+     } 
+     #social-links ul li a {
+          padding: 6px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin: 1px;
+          font-size: 25px;
+     }
+     #social-links .fa-facebook{
+           color: #0d6efd;
+     }
+     #social-links .fa-twitter{
+           color: deepskyblue;
+     }
+     #social-links .fa-linkedin{
+           color: #0e76a8;
+     }
+     #social-links .fa-whatsapp{
+          color: #25D366
+     }
+     #social-links .fa-reddit{
+          color: #FF4500;;
+     }
+     #social-links .fa-telegram{
+          color: #0088cc;
+     }
+     </style>
 </head>
 
 <body>
@@ -216,6 +249,7 @@
 <script src="{{ asset('public/frontend') }}/js/shop_custom.js"></script>
 <script src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('public/backend/plugins/printThis/printThis.js') }}"></script>
+<script src="{{ asset('public/js/share.js') }}"></script>
 
 <script type="text/javascript">
     function Cart() {

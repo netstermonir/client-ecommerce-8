@@ -130,7 +130,7 @@
           @endif
           {{-- offer menu --}}
           @if(Auth::user()->offer == 1)
-          <li class="nav-item {{ Route::is('cupon.index') || Route::is('campaign.index') ? 'menu-is-opening menu-open' : '' }}">
+          <li class="nav-item {{ Route::is('cupon.index') || Route::is('campaign.index') || Route::is('campaign.product')|| Route::is('campaign.product.list') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-angry"></i>
               <p>
@@ -146,7 +146,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('campaign.index') }}" class="nav-link {{ Route::is('campaign.index') ? 'active' : '' }}">
+                <a href="{{ route('campaign.index') }}" class="nav-link {{ Route::is('campaign.index') || Route::is('campaign.product')|| Route::is('campaign.product.list') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Campaign</p>
                 </a>

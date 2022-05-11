@@ -25,7 +25,9 @@ class CampaignController extends Controller
             $data = DB::table('campaigns')->get();
             return DataTables::of($data)->addIndexColumn()->addColumn('action', function($row){
                 $actionbtn = '<a href="#" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#categoryeditModal" data-id="'.$row->id.'" ><i class="fas fa-edit"></i></a>
-                    <a href="'.route('campaign.delete', [$row->id]).'" id="campaign_delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
+                    <a href="'.route('campaign.delete', [$row->id]).'" id="campaign_delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                    <a href="'.route('campaign.product', [$row->id]).'" class="btn btn-success btn-sm"><i class="fas fa-plus"> Add</i></a>
+                    ';
                     return $actionbtn;
             })->editColumn('status', function($row){
                 if ($row->status == 1) {
@@ -115,5 +117,46 @@ class CampaignController extends Controller
             DB::table('campaigns')->where('id', $id)->delete();
             return response()->json('Campaign Delete Sucessfull!');
         }
+    }
+
+    //capmpaign product all show
+    public function campaignProduct($campaign_id)
+    {
+        $product = DB::table('products')->leftJoin('categories','products.category_id','categories.id')->leftJoin('subcategories','products.subcategory_id','subcategories.id')->leftJoin('brands','products.brand_id','brands.id')->select('products.*','categories.category_name','subcategories.subcat_name','brands.brand_name')->where('products.status', 1)->get();
+        return view('admin.offer.campaign.campaign_product.index', compact('product', 'campaign_id'));
+    }
+
+    //campaign product store
+    public function campaignProductstore($id, $campaign_id)
+    {
+        $campaign = DB::table('campaigns')->where('id', $campaign_id)->first();
+        $product = DB::table('products')->where('id', $id)->first();
+        $discount = $product->selling_price/100*$campaign->discount;
+        $discount_price = $product->selling_price-$discount;
+        $data = [];
+        $data ['product_id'] = $id;
+        $data ['campaign_id'] = $campaign_id;
+        $data ['price'] = $discount_price;
+        $data ['created_at'] = Carbon::now();
+        $data ['updated_at'] = Carbon::now();
+        DB::table('campaign_product')->insert($data);
+        $notify = array('messege' => 'Campaign Product Added Sucessfull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notify);
+    }
+
+    //campaign product list
+    public function campaignProductList($campaign_id)
+    {
+        $product = DB::table('campaign_product')->leftJoin('products','campaign_product.product_id','products.id')->select('products.*','campaign_product.*')->where('campaign_product.campaign_id', $campaign_id)->get();
+        $campaign = DB::table('campaigns')->where('id', $campaign_id)->first();
+        return view('admin.offer.campaign.campaign_product.product_list', compact('product', 'campaign'));
+    }
+
+    //campaign product delete
+    public function campaignProductdelete($id)
+    {
+        DB::table('campaign_product')->where('id', $id)->delete();
+        $notify = array('messege' => 'Campaign Product Delete Sucessfull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notify);
     }
 }

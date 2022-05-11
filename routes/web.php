@@ -157,6 +157,10 @@ Route::group(["namespace" => 'App\Http\Controllers\frontend'], function () {
     //blog route
     Route::get("blog", "IndexController@Blog")->name("blog");
 
+    //campaign
+    Route::get("/campaign/products/list/{id}", "IndexController@campaignProduct")->name("frontend.campaign.product.list");
+    Route::get("/campaign/product/details/{slug}", "IndexController@campaignProductdetails")->name("campaign.products.details");
+
 });
     //social login
     Route::get('oauth/{driver}', [App\Http\Controllers\Auth\LoginController::class,"redirectToProvider",])->name("social.oauth");
