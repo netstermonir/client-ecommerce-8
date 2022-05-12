@@ -211,10 +211,90 @@ class ProductController extends Controller
         $product = DB::table('products')->where('id', $id)->first();
         $category = DB::table('categories')->get();
         $subcat = DB::table('subcategories')->get();
+        $childcat = DB::table('childcategories')->where('category_id', $product->category_id)->get();
         $brand = DB::table('brands')->get();
         $pickup = DB::table('pickup_points')->get();
         $warehouse = DB::table('warehouses')->get();
-        return view('admin.product.edit', compact('product', 'category', 'subcat', 'brand', 'pickup', 'warehouse'));
+        return view('admin.product.edit', compact('product', 'category', 'subcat', 'brand', 'pickup', 'warehouse', 'childcat'));
+    }
+
+    //product update method
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'code' => 'required|max:55',
+            'subcategory_id' => 'required',
+            'brand_id' => 'required',
+            'unit' => 'required',
+            'selling_price' => 'required',
+            'description' => 'required',
+        ]);
+
+        //sucategory id call form category id
+        $subcat = DB::table('subcategories')->where('id', $request->subcategory_id)->first();
+        $slug = Str::slug($request->name, '-');
+        $id = $request->id;
+        $data = [];
+        $data ['name'] = $request->name;
+        $data ['slug'] = Str::slug($request->name, '-');
+        $data ['code'] = $request->code;
+        $data ['category_id'] = $subcat->category_id;
+        $data ['subcategory_id'] = $request->subcategory_id;
+        $data ['childcategory_id'] = $request->childcategory_id;
+        $data ['brand_id'] = $request->brand_id;
+        $data ['pickup_point_id'] = $request->pickup_point_id;
+        $data ['unit'] = $request->unit;
+        $data ['tags'] = $request->tags;
+        $data ['purchase_price'] = $request->purchase_price;
+        $data ['selling_price'] = $request->selling_price;
+        $data ['discount_price'] = $request->discount_price;
+        $data ['warehouse_id'] = $request->warehouse_id;
+        $data ['stock_quantity'] = $request->stock_quantity;
+        $data ['color'] = $request->color;
+        $data ['size'] = $request->size;
+        $data ['description'] = $request->description;
+        $data ['video'] = $request->video;
+        $data ['featured'] = $request->featured;
+        $data ['today_deal'] = $request->today_deal;
+        $data ['product_slider'] = $request->product_slider;
+        $data ['trendy_product'] = $request->trendy_product;
+        $data ['status'] = $request->status;
+        //old thumbnail check and delete
+        $thumbnail = $request->file('thumbnail');
+        if ($thumbnail) {
+            $old_thumbnail = 'public/files/product/'.$request->old_thumbnail;
+            if (File::exists($old_thumbnail)) {
+                unlink($old_thumbnail);
+            }
+            $thumbnail = $request->thumbnail;
+            $photoname = $slug.'.'.$thumbnail->getClientOriginalExtension();
+            Image::make($thumbnail)->resize(600,600)->save('public/files/product/' .$photoname);
+            $data ['thumbnail'] = $photoname;
+        }
+
+        //multiple image check and delete
+        $old_image = $request->has('old_images');
+        if ($old_image) {
+            $images = $request->old_images;
+            $data ['images'] = json_encode($images);
+        }else{
+            $images = [];
+            $data ['images'] = json_encode($images);
+        }
+        if($request->hasFile('images')){
+           foreach ($request->file('images') as $key => $image) {
+               $imageName= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+               Image::make($image)->resize(600,600)->save('public/files/product/'.$imageName);
+               array_push($images, $imageName);
+           }
+           $data['images'] = json_encode($images);
+       }
+       $data ['created_at'] = Carbon::now();
+       $data ['updated_at'] = Carbon::now();
+       DB::table('products')->where('id', $id)->update($data);
+       $notify = array('messege' => 'Product Update Sucessfull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notify);
     }
 
     //product delete method

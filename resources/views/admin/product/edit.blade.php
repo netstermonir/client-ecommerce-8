@@ -31,9 +31,10 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" id="add_form">
+       <form action="{{ route('product.update') }}" method="post" enctype="multipart/form-data" id="add_form">
         @csrf
        	<div class="row">
+          <input type="hidden" name="id" value="{{ $product->id }}">
           <!-- left column -->
           <div class="col-md-8">
             <!-- general form elements -->
@@ -64,7 +65,7 @@
                         @endphp
                           <option class="text-muted" disabled>{{ $row->category_name }}</option>
                           @foreach($subcat as $row)
-                            <option value="{{ $row->id }}"> 🢆 {{ $row->subcat_name }}</option>
+                            <option value="{{ $row->id }}" @if($row->id == $product->subcategory_id) selected @endif> 🢆 {{ $row->subcat_name }}</option>
                           @endforeach
                         @endforeach
                       </select>
@@ -72,7 +73,9 @@
                     <div class="form-group col-lg-6">
                       <label for="childcategory_id">Child category<span class="text-danger">*</span> </label>
                       <select class="form-control" name="childcategory_id" id="childcategory_id">
-                         
+                         @foreach($childcat as $child)
+                          <option value="{{ $child->id }}" @if($child->id == $product->childcategory_id) selected @endif> 🢆 {{ $child->childcategory_name }}</option>
+                         @endforeach
                       </select>
                     </div>
                   </div>
@@ -82,7 +85,7 @@
                       <select class="form-control" name="brand_id" id="brand_id">
                         <option disabled selected="">⇿ choose Brand ⇿</option>
                         @foreach($brand as $row)
-                          <option value="{{ $row->id }}">{{ $row->brand_name }}</option>
+                          <option value="{{ $row->id }}" @if($row->id == $product->brand_id) selected @endif>{{ $row->brand_name }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -91,7 +94,7 @@
                       <select class="form-control" name="pickup_point_id">
                        <option disabled selected="">⇿ choose pickup-point ⇿</option>
                         @foreach($pickup as $row)
-                          <option value="{{ $row->id }}">{{ $row->pickup_point_name }}</option>
+                          <option value="{{ $row->id }}" @if($row->id == $product->pickup_point_id) selected @endif>{{ $row->pickup_point_name }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -126,7 +129,7 @@
                       <select class="form-control" name="warehouse_id" id="warehouse_id">
                        <option disabled selected="">⇿ choose Warehouse ⇿</option>
                         @foreach($warehouse as $row)
-                          <option value="{{ $row->id }}">{{ $row->warehouse_name }}</option>
+                          <option value="{{ $row->id }}" @if($row->id == $product->warehouse_id) selected @endif>{{ $row->warehouse_name }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -174,8 +177,16 @@
               <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Main Thumbnail <span class="text-danger">*</span> </label><br>
-                    <input type="file" name="thumbnail" required="" accept="image/*" class="dropify">
+                    <input type="file" name="thumbnail" accept="image/*" class="dropify">
                   </div><br>
+                  <h3 class="card-title text-center">Old Thumbnail Image</h3>
+                  <div class="row">
+                    <div class="col-md-12 thum_image">
+                      <img src="{{ asset('public/files/product/'.$product->thumbnail) }}" style="padding:10px; width: 80%; height:80px">
+                      <input type="hidden" name="old_thumbnail" value="{{ $product->thumbnail }}">
+                      <button type="button" class="remove_old_files" style="border: none; display: contents; color: white; background-color: gray;">X</button>
+                    </div>
+                  </div>
                   <div class="">  
                     <table class="table table-bordered" id="dynamic_field">
                     <div class="card-header">
@@ -185,6 +196,21 @@
                           <td><input type="file" accept="image/*" name="images[]" class="form-control name_list" /></td>  
                           <td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td>  
                       </tr>  
+                      @php
+                        $images = json_decode($product->images, true);
+                      @endphp
+                      @if($images)
+                        <div class="row">
+                          @foreach($images as $key=>$image)
+                            <div class="col-md-4 edit_image">
+                              <img src="{{ asset('public/files/product/'.$image) }}" style="padding:10px; width: 70px; height:80px">
+                              <input type="hidden" name="old_images[]" value="{{ $image }}">
+                              <button type="button" class="remove_files" style="border: none; display: contents; color: white;">X</button>
+                            </div>
+                          @endforeach
+                        </div>
+                      @else
+                      @endif
                     </table>    
                   </div>
                      <div class="card p-4">
@@ -202,10 +228,10 @@
                        <input type="checkbox" name="product_slider" value="1" @if($product->product_slider == 1) checked @endif data-bootstrap-switch data-off-color="danger" data-on-color="success">
                      </div>
 
-                     {{-- <div class="card p-4">
+                     <div class="card p-4">
                         <h6>Trendy Product</h6>
-                       <input type="checkbox" name="trendy" value="1"  data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                     </div> --}}
+                       <input type="checkbox" name="trendy_product" value="1" @if($product->trendy_product == 1) checked @endif  data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                     </div>
 
                      <div class="card p-4">
                         <h6>Status</h6>
@@ -247,6 +273,13 @@
        });  
      }); 
 
+  // reomove image
+  $('.remove_files').on('click', function(){  
+      $(this).parents('.edit_image').remove();
+  });
+  $('.remove_old_files').on('click', function(){  
+      $(this).parents('.thum_image').remove();
+  }); 
   //ajax request send for collect childcategory
      $("#subcategory_id").change(function(){
       var id = $(this).val();
