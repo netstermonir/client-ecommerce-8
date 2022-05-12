@@ -131,8 +131,8 @@
                       </select>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label for="stock_quantity">Stock</label>
-                      <input type="text" name="stock_quantity" id="stock_quantity"  class="form-control">
+                      <label for="stock_quantity">Stock <span class="text-danger">*</span></label>
+                      <input type="text" value="5000" name="stock_quantity" id="stock_quantity"  class="form-control">
                     </div>
                   </div>
 
@@ -263,30 +263,24 @@
      });
 
      //product insert method
-    $(function(){
-      // $.ajaxSetup({
-      //   headers: {
-      //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      //   }
-      //   });
-        $('#form').on('submit', function(e){
-            e.preventDefault();
-            $('.loading').removeClass('d-none');
-            var form_data = this;
-            $.ajax({
-                url:$(form_data).attr('action'),
-                method:$(form_data).attr('method'),
-                data:new FormData(form_data),
-                processData:false,
-                dataType:'json',
-                contentType:false,
-                success:function(data){
-                  $('.loading').addClass('d-none');
-                  toastr.success(data);
-                  $('#form')[0].reset();
-                }
-            });
-        });
-    });
+    // $(function(){
+    //     $('#form').on('submit', function(e){
+    //         e.preventDefault();
+    //         var form_data = this;
+    //         $.ajax({
+    //             url:$(form_data).attr('action'),
+    //             method:$(form_data).attr('method'),
+    //             data:new FormData(form_data),
+    //             processData:false,
+    //             dataType:'json',
+    //             contentType:false,
+    //             success:function(data){
+    //               toastr.success(data);
+    //               $('#form')[0].reset();
+    //               window.location.reload();
+    //             }
+    //         });
+    //     });
+    // });
 </script>
 @endsection

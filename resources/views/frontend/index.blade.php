@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-lg-5 offset-lg-4 fill_height">
                     <div class="banner_content">
-                        <h1 class="banner_text">{{ $banner->name }}</h1>
+                        <h1 class="banner_text" style="font-size:30px; width: 334px">{{ $banner->name }}</h1>
                         @if($banner->discount_price == Null)
                             <div class="banner_price">{{ $setting->currency }}{{ $banner->selling_price }}</div>
                             @else
@@ -348,7 +348,7 @@
                             <div class="new_arrivals_title">{{ $row->category_name }}</div>
                             <ul class="clearfix">
                                 <li class="active">
-                                    <a href="#" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('categorywise.product', $row->id) }}" class="btn btn-primary btn-sm">
                                         View More
                                     </a>
                                 </li>

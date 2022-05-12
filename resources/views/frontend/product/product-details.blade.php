@@ -67,8 +67,10 @@
 						</div>
 						<div class="product_name">{{ $productdetails->name }}</div>
 						<div class="product_category">
-							@if($productdetails->brand->brand_name || $productdetails->warehouses->warehouse_name)
+							@if($productdetails->brand->brand_name)
 								<b>Brand:→</b> {{ $productdetails->brand->brand_name }}
+							@endif
+							@if($productdetails->warehouses_id !== Null)
 								<b>Warehouse:→</b> {{ $productdetails->warehouses->warehouse_name }}
 							@endif
 						</div>

@@ -52,7 +52,7 @@
                         <ul class="footer_list">
                             @foreach ($page_two as $row)
                                 <li>
-                                    <a href="#">{{ $row->page_name }}</a>
+                                    <a href="{{ route('view.page', $row->page_slug) }}">{{ $row->page_name }}</a>
                                 </li>
                             @endforeach
                         </ul>

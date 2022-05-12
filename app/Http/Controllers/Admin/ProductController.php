@@ -79,7 +79,7 @@ class ProductController extends Controller
             ->addColumn('action', function($row){
                 $actionbtn = '
                     <a href="'.route('product.edit', [$row->id]).'" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="btn btn-info btn-sm show"><i class="fas fa-eye"></i></a>
+                    
                     <a href="'.route('product.delete', [$row->id]).'" id="product_delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
                     return $actionbtn;
             })->rawColumns(['action', 'thumbnail', 'category_name', 'subcat_name', 'brand_name', 'featured', 'today_deal', 'status'])->make(true);
@@ -102,7 +102,7 @@ class ProductController extends Controller
     //product store method
     public function store(Request $request){
         $validated = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:products',
             'code' => 'required|unique:products|max:55',
             'subcategory_id' => 'required',
             'brand_id' => 'required',
@@ -167,7 +167,9 @@ class ProductController extends Controller
        $data ['created_at'] = Carbon::now();
        $data ['updated_at'] = Carbon::now();
        DB::table('products')->insert($data);
-       return response()->json('Product Create Sucessfull');
+       // return response()->json('Product Create Sucessfull');
+       $notify = array('messege' => 'Product Create Sucessfull !', 'alert-type' => 'success');
+        return redirect()->back()->with($notify);
     }
 
     //product not featured method
@@ -263,10 +265,10 @@ class ProductController extends Controller
         //old thumbnail check and delete
         $thumbnail = $request->file('thumbnail');
         if ($thumbnail) {
-            $old_thumbnail = 'public/files/product/'.$request->old_thumbnail;
-            if (File::exists($old_thumbnail)) {
-                unlink($old_thumbnail);
-            }
+            // $old_thumbnail = 'public/files/product/'.$request->old_thumbnail;
+            // if (File::exists($old_thumbnail)) {
+            //     unlink($old_thumbnail);
+            // }
             $thumbnail = $request->thumbnail;
             $photoname = $slug.'.'.$thumbnail->getClientOriginalExtension();
             Image::make($thumbnail)->resize(600,600)->save('public/files/product/' .$photoname);

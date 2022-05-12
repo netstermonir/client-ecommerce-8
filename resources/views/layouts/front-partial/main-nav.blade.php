@@ -49,7 +49,11 @@
                             <div class="main_nav_menu ml-auto">
                                 <ul class="standard_dropdown main_nav_dropdown">
                                     <li><a href="{{ url('/') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="">Campaign<i class="fas fa-chevron-down"></i></a></li>
+                                    @if($campaign)
+                                    <li><a href="{{ route('frontend.campaign.product.list', $campaign->id) }}">Campaign<i class="fas fa-chevron-down"></i></a></li>
+                                    @else
+                                    <li><a class="text-muted">Campaign<i class="fas fa-chevron-down"></i></a></li>
+                                    @endif
                                     <li><a href="{{ route('blog') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="{{ route('contact') }}">Contact<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>

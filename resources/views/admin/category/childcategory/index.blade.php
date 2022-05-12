@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                       <label for="childcategory_name">ChildCategory Name</label>
-                      <input type="text" class="form-control" id="childcategory_name" name="childcategory_name" aria-describedby="subcat" placeholder="Enter SubCategory Name" required>
+                      <input type="text" class="form-control" id="childcategory_name" name="childcategory_name" aria-describedby="subcat" placeholder="Enter ChildCategory Name" required>
                       <small id="subcat" class="form-text text-muted">This is Child Category</small>
                     </div>
                         <div class="modal-footer">

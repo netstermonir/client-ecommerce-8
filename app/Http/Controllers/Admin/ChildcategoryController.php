@@ -67,7 +67,7 @@ class ChildcategoryController extends Controller
         $data ['childcategory_name'] = $request->childcategory_name;
         $data ['childcategory_slug'] = Str::slug($request->childcategory_name, '-');
         $data ['updated_at'] = Carbon::now();
-        DB::table('childcategories')->where('id', $id)->update($data);
+        DB::table('childcategories')->where('id', $request->id)->update($data);
         $notify = array('messege' => 'ChildCategory Update Sucessfull !', 'alert-type' => 'success');
         return redirect()->back()->with($notify);
     }
