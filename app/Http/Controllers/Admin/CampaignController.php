@@ -132,7 +132,7 @@ class CampaignController extends Controller
         $campaign = DB::table('campaigns')->where('id', $campaign_id)->first();
         $product = DB::table('products')->where('id', $id)->first();
         $discount = $product->selling_price/100*$campaign->discount;
-        $discount_price = $product->selling_price-$discount;
+        $discount_price = floor($product->selling_price-$discount);
         $data = [];
         $data ['product_id'] = $id;
         $data ['campaign_id'] = $campaign_id;
